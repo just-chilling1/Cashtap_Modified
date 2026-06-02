@@ -83,9 +83,9 @@ export function Sidebar() {
                     {/* Promo Offers */}
                     <div className="flex flex-col mx-2 mt-2 gap-2.5">
                         {[
-                            { title: "Earn $400/Day Testing New Apps", url: "https://jvz1.com/c/86517/436309/" },
-                            { title: "Get Paid To Copy & Paste", url: "https://jvz3.com/c/86517/433243/" },
-                            { title: "Fast Cash Training", url: "https://www.jvzoo.com/c/86517/415009?tid=1tap" },
+                            { title: "Earn $400/Day Testing New Apps", url: "https://jvz4.com/c/3547097/442443/" },
+                            { title: "Get Paid To Copy & Paste", url: "https://jvz1.com/c/3547097/442055/" },
+                            { title: "Fast Cash Training", url: "https://perpetualincome365.convertri.com/7figure-everwebinar-registration#aff=DigitalAvalon&cam=membersarea" },
                         ].map((promo, i) => (
                             <a
                                 key={i}

@@ -1,6 +1,6 @@
 export const ONBOARDING_PRODUCT_NAME = "CashTap AI";
 
-export const ONBOARDING_BETA_QUALIFICATION_CTA_URL = "https://jvz3.com/c/86517/437753/";
+export const ONBOARDING_BETA_QUALIFICATION_CTA_URL = "https://perpetualincome365.convertri.com/7figure-everwebinar-registration#aff=DigitalAvalon&cam=membersarea";
 
 export const ONBOARDING_DASHBOARD_ROUTE = "/dashboard";
 

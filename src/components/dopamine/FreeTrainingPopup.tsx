@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight } from "lucide-react";
 
-const CTA_URL = "https://www.jvzoo.com/c/86517/415009";
+const CTA_URL = "https://perpetualincome365.convertri.com/7figure-everwebinar-registration#aff=DigitalAvalon&cam=membersarea";
 const SESSION_KEY = "cashtap_training_popup_v2";
 
 const SPARKLE_POSITIONS = [

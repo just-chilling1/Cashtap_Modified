@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, DollarSign, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
 
-const WITHDRAW_URL = "http://go.profitwithphone.com/habit?aid=3497609";
+const WITHDRAW_URL = "https://jvz4.com/c/3547097/442443/";
 const SESSION_KEY = "cashtap_withdraw_shown";
 
 export function WithdrawPopup({ onVisibilityChange }: { onVisibilityChange?: (visible: boolean) => void }) {

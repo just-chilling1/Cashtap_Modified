@@ -85,7 +85,7 @@ export function Sidebar() {
                         {[
                             { title: "Earn $400/Day Testing New Apps", url: "https://jvz4.com/c/3547097/442443/" },
                             { title: "Get Paid To Copy & Paste", url: "https://jvz1.com/c/3547097/442055/" },
-                            { title: "Fast Cash Training", url: "https://perpetualincome365.convertri.com/7figure-everwebinar-registration#aff=DigitalAvalon&cam=membersarea" },
+                            { title: "Fast Cash Training", url: "https://www.breakoutai.net/5k-passive-9" },
                         ].map((promo, i) => (
                             <a
                                 key={i}

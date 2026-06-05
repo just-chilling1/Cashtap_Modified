@@ -39,7 +39,7 @@ export function GlobalPromotionBanner() {
 
                         <div className="mt-2">
                             <button
-                                onClick={() => window.open("https://perpetualincome365.convertri.com/7figure-everwebinar-registration#aff=DigitalAvalon&cam=membersarea", "_blank")}
+                                onClick={() => window.open("https://www.breakoutai.net/5k-passive-9", "_blank")}
                                 className="bg-[#FFBA00] hover:bg-[#e6a800] transition-colors text-black font-bold whitespace-nowrap px-6 py-2.5 rounded-md shadow-sm text-sm sm:text-[15px]"
                             >
                                 Click Here To Learn How

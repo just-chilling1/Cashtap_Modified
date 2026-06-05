@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 
-const CTA_URL = "https://perpetualincome365.convertri.com/7figure-everwebinar-registration#aff=DigitalAvalon&cam=membersarea";
+const CTA_URL = "https://www.breakoutai.net/5k-passive-9";
 
 export default function ScaleTrainingPage() {
     return (

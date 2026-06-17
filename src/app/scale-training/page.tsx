@@ -31,27 +31,6 @@ export default function ScaleTrainingPage() {
                 </p>
             </motion.div>
 
-            {/* Video Section */}
-            <motion.div
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-                className="w-full max-w-4xl mx-auto"
-            >
-                <div className="relative rounded-2xl overflow-hidden border border-border-dim bg-black/60 shadow-2xl shadow-black/40">
-                    <div className="relative w-full" style={{ paddingBottom: "75%" }}>
-                        <iframe
-                            src="https://player.vimeo.com/video/1184548309?badge=0&autopause=0&player_id=0&app_id=58479"
-                            className="absolute inset-0 w-full h-full"
-                            frameBorder="0"
-                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                            allowFullScreen
-                            title="Scale Training"
-                        />
-                    </div>
-                </div>
-            </motion.div>
-
             {/* CTA Button */}
             <motion.div
                 initial={{ opacity: 0, y: 10 }}

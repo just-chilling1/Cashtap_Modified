@@ -11,6 +11,7 @@ import { useSearch, Ad } from "@/context/SearchContext";
 import { useRouter } from "next/navigation";
 import { clsx } from "clsx";
 import { SuccessCelebration } from "@/components/dopamine/SuccessCelebration";
+import { InfoHint } from "@/components/ui/InfoHint";
 
 function PlatformBadge({ platform }: { platform: string }) {
     const isReddit = platform === "Reddit";
@@ -167,6 +168,10 @@ export default function RepliesPage() {
                         value={affiliateLink}
                         onChange={(e) => setAffiliateLink(e.target.value)}
                     />
+                    <InfoHint
+                        label="What is an affiliate link?"
+                        text="Affiliate link = your own special link. When someone buys through it, you get paid."
+                    />
                 </div>
             </header>
 
@@ -203,14 +208,14 @@ export default function RepliesPage() {
                                 <div className="flex items-center gap-1 shrink-0">
                                     <button
                                         onClick={() => removePost(post.id)}
-                                        className="w-7 h-7 rounded-lg flex items-center justify-center text-text-muted hover:text-red-500 hover:bg-red-500/10 transition-all"
+                                        className="w-10 h-10 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-text-muted hover:text-red-500 hover:bg-red-500/10 transition-all"
                                         title="Remove ad"
                                     >
                                         <Trash2 size={13} />
                                     </button>
                                     <a
                                         href={post.url} target="_blank" rel="noopener noreferrer"
-                                        className="w-7 h-7 rounded-lg flex items-center justify-center text-text-muted hover:text-accent hover:bg-accent/10 transition-all"
+                                        className="w-10 h-10 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-text-muted hover:text-accent hover:bg-accent/10 transition-all"
                                     >
                                         <ExternalLink size={13} />
                                     </a>
@@ -325,8 +330,12 @@ export default function RepliesPage() {
                     <ArrowLeft size={14} />
                     <span>Back to Step 3</span>
                 </button>
-                <p className="text-[10px] text-text-muted">
+                <p className="text-[10px] text-text-muted inline-flex items-center gap-1">
                     Copy a reply → paste it under the ad → include your link → earn commissions
+                    <InfoHint
+                        label="What is a commission?"
+                        text="A commission is the money you earn each time someone buys through your link."
+                    />
                 </p>
             </div>
         </motion.div>

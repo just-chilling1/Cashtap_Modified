@@ -7,6 +7,7 @@ import {
     ChevronRight, Flame, RotateCcw, Sparkles, ExternalLink
 } from "lucide-react";
 import { clsx } from "clsx";
+import { InfoHint } from "@/components/ui/InfoHint";
 
 interface Post {
     id: string;
@@ -248,7 +249,13 @@ export default function DfyPage() {
                     >
                         <div className="flex items-center gap-3 px-1">
                             <Zap size={18} className="text-accent" />
-                            <h2 className="text-xl font-bold text-white">Choose Your Keyword</h2>
+                            <h2 className="text-xl font-bold text-white inline-flex items-center gap-2">
+                                Choose Your Keyword
+                                <InfoHint
+                                    label="What is a niche?"
+                                    text="A niche is just a topic area — like fitness, dogs, or skincare. Pick the one closest to what you want to promote."
+                                />
+                            </h2>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -325,7 +332,13 @@ export default function DfyPage() {
                                     <LinkIcon size={18} className="text-accent" />
                                 </div>
                                 <div>
-                                    <h2 className="text-xl font-bold text-white">Provide Your Digistore Affiliate Link</h2>
+                                    <h2 className="text-xl font-bold text-white inline-flex items-center gap-2">
+                                        Provide Your Digistore Affiliate Link
+                                        <InfoHint
+                                            label="What is a Digistore affiliate link?"
+                                            text="Digistore24 is a store that pays you for sales. Your affiliate link is your own special link — when someone buys through it, you get paid."
+                                        />
+                                    </h2>
                                     <p className="text-[13px] text-text-muted">We&apos;ll find high-ranking posts and generate replies with your link.</p>
                                 </div>
                             </div>
@@ -518,7 +531,7 @@ export default function DfyPage() {
 
             {/* Footer */}
             <footer className="mt-10 pt-8 border-t border-white/5 flex flex-col items-center gap-4 pb-10">
-                <div className="flex items-center gap-8">
+                <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
                     {["5 Hot Keywords", "Real Posts Found", "AI Replies + Your Link", "Copy & Earn"].map((b, i) => (
                         <div key={i} className="flex items-center gap-2 text-[10px] font-black text-text-muted uppercase tracking-[0.2em]">
                             <div className="w-1 h-1 rounded-full bg-accent" />

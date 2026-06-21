@@ -202,7 +202,7 @@ export default function AnalysisPage() {
                         <div>
                             <h1 className="text-2xl text-text-primary font-black tracking-tight">Step 2: Check Demand</h1>
                             <p className="text-sm text-text-muted">
-                                Topic: <span className="text-text-primary font-semibold">&ldquo;{keyword}&rdquo;</span> &middot; {variations.length} variations found
+                                Topic: <span className="text-text-primary font-semibold">&ldquo;{keyword}&rdquo;</span> &middot; {variations.length} keyword ideas found
                             </p>
                         </div>
                     </div>
@@ -301,7 +301,8 @@ export default function AnalysisPage() {
             </AnimatePresence>
 
             {/* Data Table */}
-            <div className="border border-border-dim/30 rounded-xl overflow-hidden bg-[#0a0a0c]">
+            <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+            <div className="min-w-[640px] border border-border-dim/30 rounded-xl overflow-hidden bg-[#0a0a0c]">
                 {/* Table Header */}
                 <div className="grid grid-cols-12 gap-4 px-5 py-3 bg-[#0c0c0e] border-b border-border-dim/20">
                     <div className="col-span-4">
@@ -396,6 +397,7 @@ export default function AnalysisPage() {
                         );
                     })}
                 </div>
+            </div>
             </div>
 
             {/* Selected detail panel */}

@@ -42,7 +42,7 @@ function AdCard({
             )}
         >
             <div className={clsx(
-                "absolute top-3 right-3 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all",
+                "absolute top-3 right-3 w-7 h-7 sm:w-5 sm:h-5 rounded-full border-2 flex items-center justify-center transition-all",
                 isSelected ? "bg-accent border-accent text-black" : "border-border-dim bg-page group-hover:border-accent/40"
             )}>
                 {isSelected && <Check size={11} strokeWidth={4} />}
@@ -187,7 +187,7 @@ export default function RadarPage() {
             </header>
 
             {/* Keyword chips */}
-            <div className="flex flex-wrap gap-2">
+            <div id="radar-keyword-chips" className="flex flex-wrap gap-2">
                 {variations.map((v) => (
                     <button
                         key={v}
@@ -225,6 +225,22 @@ export default function RadarPage() {
                             <Search size={32} className="text-text-muted/20" />
                             <p className="text-sm text-text-muted font-medium">No ads found for &ldquo;{activeChip}&rdquo;</p>
                             <p className="text-[11px] text-text-muted">Try clicking a different keyword above.</p>
+                            <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
+                                <button
+                                    onClick={() => {
+                                        document.getElementById("radar-keyword-chips")?.scrollIntoView({ behavior: "smooth", block: "center" });
+                                    }}
+                                    className="btn-secondary py-2.5 px-4 text-[13px]"
+                                >
+                                    Try another keyword
+                                </button>
+                                <button
+                                    onClick={() => router.push("/search")}
+                                    className="text-[12px] font-bold text-text-muted hover:text-accent transition-colors"
+                                >
+                                    Start a new search
+                                </button>
+                            </div>
                         </div>
                     )}
                 </AnimatePresence>

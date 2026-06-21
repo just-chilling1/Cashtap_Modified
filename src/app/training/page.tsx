@@ -470,8 +470,8 @@ export default function TrainingPage() {
                                     Premium Feature 3
                                 </span>
                             </div>
-                            <h3 className="text-sm font-bold text-white">Instant Access</h3>
-                            <p className="text-[12px] text-text-muted leading-relaxed">Learn how to use the Instant Access feature to copy proven Facebook posts and start earning commissions right away.</p>
+                            <h3 className="text-sm font-bold text-white">Instant Income</h3>
+                            <p className="text-[12px] text-text-muted leading-relaxed">Learn how to use the Instant Income feature to copy proven Facebook posts and start earning commissions right away.</p>
                         </div>
                     </motion.div>
                 </div>

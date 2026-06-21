@@ -8,6 +8,7 @@ import {
     ChevronDown, ChevronUp, BookOpen, Clipboard, Copy
 } from "lucide-react";
 import { clsx } from "clsx";
+import { InfoHint } from "@/components/ui/InfoHint";
 
 const NICHES = [
     "All",
@@ -262,7 +263,13 @@ export default function AutomatedProfitsPage() {
             <section className="mt-14 flex flex-col gap-8">
                 {/* Page URL Input */}
                 <div className="glass-card p-8 flex flex-col gap-4">
-                    <h3 className="text-lg font-bold text-text-primary">Enter Your Page URL:</h3>
+                    <h3 className="text-lg font-bold text-text-primary inline-flex items-center gap-2">
+                        Enter Your Page URL:
+                        <InfoHint
+                            label="What is a page URL or affiliate link?"
+                            text="This is the web address you want to promote — usually your affiliate link (your own special link that pays you when someone buys through it)."
+                        />
+                    </h3>
                     <input
                         type="url"
                         placeholder="https://your-page-url.com"

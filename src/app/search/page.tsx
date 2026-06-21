@@ -6,6 +6,8 @@ import { Search, ArrowRight, History, Loader2, Zap } from "lucide-react";
 import { useSearch } from "@/context/SearchContext";
 import { motion } from "framer-motion";
 import { SuccessCelebration } from "@/components/dopamine/SuccessCelebration";
+import { InfoHint } from "@/components/ui/InfoHint";
+import { InlineError } from "@/components/ui/InlineError";
 
 export default function SearchPage() {
     const {
@@ -16,6 +18,7 @@ export default function SearchPage() {
     const [loading, setLoading] = useState(false);
     const [showCelebration, setShowCelebration] = useState(false);
     const [foundCount, setFoundCount] = useState(0);
+    const [error, setError] = useState("");
     const router = useRouter();
 
     const handleSearch = async (val?: string) => {
@@ -23,6 +26,7 @@ export default function SearchPage() {
         if (!searchVal) return;
 
         setLoading(true);
+        setError("");
         addToHistory(searchVal);
 
         try {
@@ -34,7 +38,7 @@ export default function SearchPage() {
             const data = await resp.json();
 
             if (!resp.ok) {
-                alert(data.error || "Search failed. Please try again.");
+                setError("That didn't work — please try again in a moment.");
                 return;
             }
 
@@ -44,7 +48,7 @@ export default function SearchPage() {
             setShowCelebration(true);
         } catch (e) {
             console.error(e);
-            alert("A network error occurred. Please check your connection.");
+            setError("We couldn't connect. Check your internet and try again.");
         } finally {
             setLoading(false);
         }
@@ -58,7 +62,7 @@ export default function SearchPage() {
         >
             <SuccessCelebration
                 show={showCelebration}
-                title={`Found ${foundCount} Ad Angles!`}
+                title={`Found ${foundCount} ad ideas!`}
                 subtitle="Great start. Let's check which ones have the most demand."
                 onDone={() => { setShowCelebration(false); router.push("/analysis"); }}
             />
@@ -69,8 +73,12 @@ export default function SearchPage() {
                     <Zap size={12} className="text-accent" />
                     <span className="text-[10px] font-bold text-accent uppercase tracking-wider">Step 1 of 4</span>
                 </div>
-                <h1 className="text-3xl text-text-primary font-black tracking-tight">
+                <h1 className="text-3xl text-text-primary font-black tracking-tight inline-flex items-center gap-2">
                     Enter Your Ad Topic
+                    <InfoHint
+                        label="What is an ad topic?"
+                        text="A topic is just the subject people are searching for — like 'weight loss' or 'dog food'. Pick one thing you want to promote."
+                    />
                 </h1>
                 <p className="text-sm text-text-muted max-w-md">
                     Type one topic below. We will find related ads and conversations from Reddit and YouTube.
@@ -110,6 +118,8 @@ export default function SearchPage() {
                         </div>
                     )}
                 </button>
+
+                <InlineError message={error} />
             </div>
 
             {/* Recent Searches */}

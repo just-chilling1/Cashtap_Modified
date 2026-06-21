@@ -91,7 +91,7 @@ export default function LoginPage() {
                         )}
 
                         <div className="flex flex-col gap-2">
-                            <label className="text-[10px] font-black uppercase tracking-widest text-[#475569] ml-1">Email Identifier</label>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-[#475569] ml-1">Email</label>
                             <div className="relative group">
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#475569] group-focus-within:text-[#D4AF37] transition-colors" size={18} />
                                 <input
@@ -99,14 +99,14 @@ export default function LoginPage() {
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="operator@adradar.ai"
+                                    placeholder="you@email.com"
                                     className="input-base w-full pl-12"
                                 />
                             </div>
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label className="text-[10px] font-black uppercase tracking-widest text-[#475569] ml-1">Secure Password</label>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-[#475569] ml-1">Password</label>
                             <div className="relative group">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#475569] group-focus-within:text-[#D4AF37] transition-colors" size={18} />
                                 <input
@@ -142,7 +142,7 @@ export default function LoginPage() {
                             className="btn-primary w-full mt-2 group relative overflow-hidden"
                         >
                             <span className="relative z-10 flex items-center justify-center gap-2">
-                                {loading ? "Authorizing..." : (
+                                {loading ? "Logging in..." : (
                                     <>
                                         Log In
                                         <LogIn size={18} />

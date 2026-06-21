@@ -15,23 +15,29 @@ const STEPS = [
     { path: "/radar", label: "Step 3: Find Ads", icon: Radar },
     { path: "/replies", label: "Step 4: Create Replies", icon: MessageSquare },
     { path: "/training", label: "Training", icon: GraduationCap },
-    { path: "/scale-training", label: "New Way To Scale To $1,000 To $5,000", icon: TrendingUp },
+    { path: "/scale-training", label: "Scale to $1k–$5k/day", icon: TrendingUp },
 ];
 
 const UPGRADES = [
     { path: "/dfy", label: "Done-For-You", icon: Scan },
-    { path: "/instant", label: "Instnat Income", icon: Sparkles },
+    { path: "/instant", label: "Instant Income", icon: Sparkles },
     { path: "/autopilot", label: "Automated Profits", icon: Rocket },
 ];
 
-export function Sidebar() {
+export function Sidebar({ open = false, onClose }: { open?: boolean; onClose?: () => void }) {
     const pathname = usePathname();
     const { resetSession } = useSearch();
     const currentIndex = STEPS.findIndex(s => s.path === pathname);
     const progress = ((currentIndex + 1) / STEPS.length) * 100;
 
     return (
-        <aside className="w-72 bg-[#050505] border-r border-[#141414] flex flex-col relative shrink-0 h-screen overflow-hidden">
+        <aside
+            className={clsx(
+                "w-72 bg-[#050505] border-r border-[#141414] flex flex-col relative shrink-0 h-screen overflow-hidden",
+                "fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 ease-out lg:static lg:z-auto lg:translate-x-0",
+                open ? "translate-x-0" : "-translate-x-full"
+            )}
+        >
             {/* Dynamic Progress Line */}
             <div className="absolute left-0 top-0 w-0.5 h-full bg-[#141414] z-0">
                 <motion.div
@@ -43,7 +49,7 @@ export function Sidebar() {
             </div>
 
             <div className="flex flex-col p-6 gap-10 relative z-10 h-full">
-                <Link href="/dashboard" className="flex items-center gap-4 group">
+                <Link href="/dashboard" onClick={onClose} className="flex items-center gap-4 group">
                     <div className="w-10 h-10 bg-accent flex items-center justify-center rounded-lg shadow-gold">
                         <Target size={22} className="text-black" />
                     </div>
@@ -65,6 +71,7 @@ export function Sidebar() {
                                 <Link
                                     key={step.path}
                                     href={step.path}
+                                    onClick={onClose}
                                     className={clsx(
                                         "command-nav-link group py-4 whitespace-nowrap",
                                         isActive && "active"
@@ -120,6 +127,7 @@ export function Sidebar() {
                                     <Link
                                         key={step.path}
                                         href={step.path}
+                                        onClick={onClose}
                                         className={clsx(
                                             "flex items-center justify-center gap-3 py-3.5 rounded-full transition-all duration-300 border",
                                             isActive

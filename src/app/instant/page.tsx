@@ -9,6 +9,7 @@ import {
     ExternalLink
 } from "lucide-react";
 import { clsx } from "clsx";
+import { InfoHint } from "@/components/ui/InfoHint";
 
 const NICHES = [
     "All Niches",
@@ -380,7 +381,13 @@ export default function InstantIncomePage() {
 
                 {/* Step 2: Affiliate Link Input */}
                 <div className="flex flex-col gap-3">
-                    <h3 className="text-base font-bold text-text-primary">Step 2: Enter Your Affiliate Link</h3>
+                    <h3 className="text-base font-bold text-text-primary inline-flex items-center gap-2">
+                        Step 2: Enter Your Affiliate Link
+                        <InfoHint
+                            label="What is an affiliate link?"
+                            text="Affiliate link = your own special link. When someone buys through it, you get paid."
+                        />
+                    </h3>
                     <input
                         type="url"
                         placeholder="https://your-affiliate-link.com"

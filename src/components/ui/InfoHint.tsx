@@ -1,8 +1,12 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { HelpCircle } from "lucide-react";
 import { clsx } from "clsx";
+
+const TIP_WIDTH = 240; // ~15rem
+const MARGIN = 8;
 
 export function InfoHint({
     text,
@@ -14,60 +18,104 @@ export function InfoHint({
     className?: string;
 }) {
     const [open, setOpen] = useState(false);
-    const wrapRef = useRef<HTMLSpanElement>(null);
+    const [mounted, setMounted] = useState(false);
+    const [coords, setCoords] = useState<{ top: number; left: number; placement: "top" | "bottom" } | null>(null);
+    const triggerRef = useRef<HTMLSpanElement>(null);
+    const tipRef = useRef<HTMLDivElement>(null);
     const tipId = useId();
+
+    useEffect(() => setMounted(true), []);
+
+    const updatePosition = useCallback(() => {
+        const el = triggerRef.current;
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        const vw = window.innerWidth;
+        let left = r.left + r.width / 2 - TIP_WIDTH / 2;
+        left = Math.max(MARGIN, Math.min(left, vw - TIP_WIDTH - MARGIN));
+        const placement: "top" | "bottom" = r.top > 140 ? "top" : "bottom";
+        const top = placement === "top" ? r.top - MARGIN : r.bottom + MARGIN;
+        setCoords({ top, left, placement });
+    }, []);
+
+    useLayoutEffect(() => {
+        if (open) updatePosition();
+    }, [open, updatePosition]);
 
     useEffect(() => {
         if (!open) return;
 
-        const handlePointer = (e: PointerEvent) => {
-            if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        const close = () => setOpen(false);
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setOpen(false);
+        };
+        const onPointer = (e: PointerEvent) => {
+            const target = e.target as Node;
+            if (
+                triggerRef.current && !triggerRef.current.contains(target) &&
+                tipRef.current && !tipRef.current.contains(target)
+            ) {
                 setOpen(false);
             }
         };
-        const handleKey = (e: KeyboardEvent) => {
-            if (e.key === "Escape") setOpen(false);
-        };
 
-        document.addEventListener("pointerdown", handlePointer);
-        document.addEventListener("keydown", handleKey);
+        window.addEventListener("scroll", close, true);
+        window.addEventListener("resize", updatePosition);
+        document.addEventListener("keydown", onKey);
+        document.addEventListener("pointerdown", onPointer);
         return () => {
-            document.removeEventListener("pointerdown", handlePointer);
-            document.removeEventListener("keydown", handleKey);
+            window.removeEventListener("scroll", close, true);
+            window.removeEventListener("resize", updatePosition);
+            document.removeEventListener("keydown", onKey);
+            document.removeEventListener("pointerdown", onPointer);
         };
-    }, [open]);
+    }, [open, updatePosition]);
+
+    const toggle = (e: React.MouseEvent | React.KeyboardEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setOpen((v) => !v);
+    };
 
     return (
         <span
-            ref={wrapRef}
+            ref={triggerRef}
             className={clsx("relative inline-flex items-center align-middle", className)}
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}
         >
-            <button
-                type="button"
+            <span
+                role="button"
+                tabIndex={0}
                 aria-label={label}
                 aria-expanded={open}
                 aria-describedby={open ? tipId : undefined}
-                onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setOpen((v) => !v);
+                onClick={toggle}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") toggle(e);
                 }}
                 className="inline-flex items-center justify-center w-6 h-6 -m-1 text-text-muted hover:text-accent focus:text-accent outline-none focus-visible:ring-1 focus-visible:ring-accent/40 rounded-full transition-colors cursor-help"
             >
                 <HelpCircle size={14} />
-            </button>
+            </span>
 
-            {open && (
-                <span
+            {mounted && open && coords && createPortal(
+                <div
+                    ref={tipRef}
                     id={tipId}
                     role="tooltip"
-                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-60 max-w-[15rem] px-3 py-2 bg-[#0A0A0B] border border-accent/25 rounded-lg text-[12px] leading-snug text-text-secondary shadow-xl pointer-events-none"
+                    style={{
+                        position: "fixed",
+                        top: coords.top,
+                        left: coords.left,
+                        width: TIP_WIDTH,
+                        transform: coords.placement === "top" ? "translateY(-100%)" : "none",
+                    }}
+                    className="z-[100] px-3 py-2 bg-[#0A0A0B] border border-accent/25 rounded-lg text-[12px] leading-snug text-text-secondary shadow-xl pointer-events-none normal-case tracking-normal font-normal"
                 >
                     {text}
-                    <span className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 w-2 h-2 bg-[#0A0A0B] border-r border-b border-accent/25 rotate-45" />
-                </span>
+                </div>,
+                document.body
             )}
         </span>
     );

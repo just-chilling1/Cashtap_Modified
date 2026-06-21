@@ -5,23 +5,12 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     Brain, BarChart3, Shield, Zap, Search, ArrowRight, MessageSquare,
-    Flame, TrendingDown, Loader2, HelpCircle, ArrowUpDown, ChevronDown,
+    Flame, TrendingDown, Loader2, ArrowUpDown, ChevronDown,
     ChevronUp, Info, CheckCircle2, RefreshCw
 } from "lucide-react";
 import { useSearch, AnalysisData } from "@/context/SearchContext";
 import { clsx } from "clsx";
-
-function Tooltip({ text }: { text: string }) {
-    return (
-        <div className="group/tip relative inline-flex items-center">
-            <HelpCircle size={12} className="text-text-muted/50 hover:text-accent cursor-help transition-colors" />
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-[#1a1a1c] border border-border-dim rounded-lg text-[11px] text-text-secondary leading-snug w-56 opacity-0 pointer-events-none group-hover/tip:opacity-100 group-hover/tip:pointer-events-auto transition-opacity z-50 shadow-xl">
-                {text}
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-2 h-2 bg-[#1a1a1c] border-r border-b border-border-dim rotate-45 -mt-1" />
-            </div>
-        </div>
-    );
-}
+import { InfoHint } from "@/components/ui/InfoHint";
 
 function LevelBadge({ level }: { level: string }) {
     const l = level?.toLowerCase() || "";
@@ -159,7 +148,7 @@ export default function AnalysisPage() {
             <span className="text-[10px] font-black uppercase tracking-widest text-text-muted group-hover/sort:text-text-primary transition-colors">
                 {label}
             </span>
-            <Tooltip text={tooltip} />
+            <InfoHint text={tooltip} label={`What does ${label} mean?`} />
             {sortKey === sKey ? (
                 sortDir === "desc" ? <ChevronDown size={10} className="text-accent" /> : <ChevronUp size={10} className="text-accent" />
             ) : (

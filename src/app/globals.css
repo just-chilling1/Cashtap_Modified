@@ -51,11 +51,16 @@
 }
 
 @layer base {
+  html {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
   body {
     background-color: var(--bg-page);
     color: var(--text-primary);
     font-family: var(--font-ui);
-    @apply antialiased min-h-screen;
+    @apply antialiased min-h-screen overflow-x-hidden max-w-full;
     background-image:
       radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.03) 0px, transparent 50%),
       radial-gradient(at 100% 100%, rgba(234, 179, 8, 0.03) 0px, transparent 50%);

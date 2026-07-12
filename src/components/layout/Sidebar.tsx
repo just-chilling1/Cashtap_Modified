@@ -33,8 +33,8 @@ export function Sidebar({ open = false, onClose }: { open?: boolean; onClose?: (
     return (
         <aside
             className={clsx(
-                "w-72 bg-[#050505] border-r border-[#141414] flex flex-col relative shrink-0 h-screen overflow-hidden",
-                "fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 ease-out lg:static lg:z-auto lg:translate-x-0",
+                "w-72 bg-[#050505] border-r border-[#141414] flex flex-col relative h-screen overflow-hidden",
+                "fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 ease-out lg:static lg:z-auto lg:shrink-0 lg:translate-x-0",
                 open ? "translate-x-0" : "-translate-x-full"
             )}
         >

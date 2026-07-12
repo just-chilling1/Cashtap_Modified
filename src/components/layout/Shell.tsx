@@ -25,7 +25,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <div className="flex h-screen overflow-hidden bg-[#080808] w-full">
+        <div className="flex h-screen overflow-hidden bg-[#080808] w-full max-w-[100vw]">
             {/* Mobile backdrop */}
             {sidebarOpen && (
                 <div
@@ -35,9 +35,12 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 />
             )}
 
-            <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+            {/* Zero-width on mobile so the fixed sidebar does not squeeze main content */}
+            <div className="w-0 shrink-0 overflow-visible lg:w-72">
+                <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+            </div>
 
-            <main className="flex-1 overflow-y-auto scroll-smooth relative">
+            <main className="flex-1 min-w-0 w-full overflow-x-hidden overflow-y-auto scroll-smooth relative">
                 {/* Mobile top bar */}
                 <div className="lg:hidden sticky top-0 z-30 flex items-center justify-between px-4 h-14 bg-[#080808]/95 backdrop-blur border-b border-[#141414]">
                     <button
@@ -58,7 +61,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                     <div className="w-10" aria-hidden="true" />
                 </div>
 
-                <div className="px-4 sm:px-8 lg:px-16 pt-6 lg:pt-10 pb-16 max-w-7xl mx-auto min-h-full flex flex-col">
+                <div className="px-4 sm:px-8 lg:px-16 pt-6 lg:pt-10 pb-16 max-w-7xl mx-auto min-h-full flex flex-col w-full min-w-0">
                     <GlobalPromotionBanner />
                     {children}
                     <div className="mt-auto pt-16">

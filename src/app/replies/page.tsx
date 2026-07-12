@@ -205,7 +205,7 @@ export default function RepliesPage() {
                                         {post.title || post.text}
                                     </p>
                                 </div>
-                                <div className="flex items-center gap-1 shrink-0">
+                                <div className="flex items-center gap-1.5 shrink-0">
                                     <button
                                         onClick={() => removePost(post.id)}
                                         className="w-10 h-10 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-text-muted hover:text-red-500 hover:bg-red-500/10 transition-all"
@@ -214,10 +214,13 @@ export default function RepliesPage() {
                                         <Trash2 size={13} />
                                     </button>
                                     <a
-                                        href={post.url} target="_blank" rel="noopener noreferrer"
-                                        className="w-10 h-10 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-text-muted hover:text-accent hover:bg-accent/10 transition-all"
+                                        href={post.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 border border-accent/20 text-[10px] font-bold text-accent hover:bg-accent/20 transition-all"
                                     >
-                                        <ExternalLink size={13} />
+                                        <ExternalLink size={11} />
+                                        <span>Go to Post</span>
                                     </a>
                                 </div>
                             </div>

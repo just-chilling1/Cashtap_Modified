@@ -12,9 +12,10 @@ const URGENCY_MESSAGES = [
 ];
 
 export function UrgencyBanner() {
-    const [index, setIndex] = useState(Math.floor(Math.random() * URGENCY_MESSAGES.length));
+    const [index, setIndex] = useState(0);
 
     useEffect(() => {
+        setIndex(Math.floor(Math.random() * URGENCY_MESSAGES.length));
         const interval = setInterval(() => {
             setIndex(prev => (prev + 1) % URGENCY_MESSAGES.length);
         }, 12000);

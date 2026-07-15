@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { clsx } from "clsx";
 import { InfoHint } from "@/components/ui/InfoHint";
+import { VideoEmbed } from "@/components/ui/LazyIframe";
 
 const NICHES = [
     "All",
@@ -169,50 +170,44 @@ export default function AutomatedProfitsPage() {
         <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex flex-col gap-0 max-w-5xl mx-auto w-full py-6"
+            className="page-stack"
         >
             {/* Hero */}
-            <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-accent/10 via-surface to-accent-muted/10 border border-accent/20 p-10 md:p-16 flex flex-col items-center text-center gap-6">
+            <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-accent/10 via-surface to-accent-muted/10 border border-accent/20 p-5 sm:p-10 md:p-16 flex flex-col items-center text-center gap-6">
                 <div className="absolute top-0 right-0 w-60 h-60 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-40 h-40 bg-accent-muted/10 rounded-full blur-[80px] pointer-events-none" />
 
-                <div className="relative z-10 flex flex-col items-center gap-6">
+                <div className="relative z-10 flex flex-col items-center gap-6 min-w-0">
                     <div className="w-20 h-20 bg-accent/15 border border-accent/30 rounded-3xl flex items-center justify-center">
                         <TrendingUp size={40} className="text-accent" />
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-black text-text-primary tracking-tight leading-tight">
+                    <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-text-primary tracking-tight leading-tight break-words">
                         Automated Income - Traffic On Autopilot
                     </h1>
                     <p className="text-lg md:text-xl font-bold text-accent">
                         100+ Free Traffic Sources - Submit Once, Get Traffic Forever
                     </p>
-                    <p className="text-text-secondary text-base max-w-2xl leading-relaxed">
+                    <p className="subtitle max-w-2xl text-center">
                         Stop chasing traffic every day. Submit your link to these 100+ sites ONCE and get ongoing traffic automatically. Our members have generated over 2.8 million visitors using these sources.
                     </p>
                 </div>
             </section>
 
             {/* Video Tutorial */}
-            <section className="mt-10 glass-card p-0 overflow-hidden">
+            <section className="glass-card p-0 overflow-hidden">
                 <div className="flex flex-col md:flex-row">
                     <div className="md:w-1/2 relative bg-black/40">
-                        <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-                            <iframe
-                                src="https://player.vimeo.com/video/1171734563?badge=0&autopause=0&player_id=0&app_id=58479"
-                                className="absolute inset-0 w-full h-full"
-                                frameBorder="0"
-                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                                allowFullScreen
-                                title="Automated Profits Tutorial"
-                            />
-                        </div>
+                        <VideoEmbed
+                            src="https://player.vimeo.com/video/1171734563?badge=0&autopause=0&player_id=0&app_id=58479"
+                            title="Automated Profits Tutorial"
+                        />
                     </div>
-                    <div className="md:w-1/2 p-8 md:p-10 flex flex-col justify-center gap-4">
+                    <div className="md:w-1/2 p-4 sm:p-8 md:p-10 flex flex-col justify-center gap-4 min-w-0">
                         <div className="flex items-center gap-2">
                             <Sparkles size={14} className="text-accent" />
                             <span className="text-[11px] font-bold text-accent uppercase tracking-[0.2em]">Watch First</span>
                         </div>
-                        <h2 className="text-2xl font-bold text-text-primary">How to Use Automated Income</h2>
+                        <h2 className="section-title">How to Use Automated Income</h2>
                         <p className="text-text-secondary leading-relaxed">
                             Watch this quick tutorial to learn how to submit your link to these 100+ traffic sources and get automated traffic forever!
                         </p>
@@ -221,10 +216,10 @@ export default function AutomatedProfitsPage() {
             </section>
 
             {/* How This Works */}
-            <section className="mt-10 glass-card p-8 flex flex-col gap-8">
-                <div className="flex items-center gap-3">
-                    <BookOpen size={22} className="text-accent" />
-                    <h2 className="text-xl font-bold text-text-primary">How This Works (Super Simple!)</h2>
+            <section className="glass-card p-4 sm:p-8 flex flex-col gap-8">
+                <div className="flex items-center gap-3 min-w-0">
+                    <BookOpen size={22} className="text-accent shrink-0" />
+                    <h2 className="section-title min-w-0">How This Works (Super Simple!)</h2>
                 </div>
 
                 <div className="bg-surface border border-border-dim rounded-xl p-6 flex flex-col gap-4">
@@ -260,10 +255,10 @@ export default function AutomatedProfitsPage() {
             </section>
 
             {/* ====== INTERACTIVE SECTION ====== */}
-            <section className="mt-14 flex flex-col gap-8">
+            <section className="flex flex-col gap-8">
                 {/* Page URL Input */}
-                <div className="glass-card p-8 flex flex-col gap-4">
-                    <h3 className="text-lg font-bold text-text-primary inline-flex items-center gap-2">
+                <div className="glass-card p-4 sm:p-8 flex flex-col gap-4">
+                    <h3 className="text-lg font-bold text-text-primary flex flex-wrap items-center gap-2">
                         Enter Your Page URL:
                         <InfoHint
                             label="What is a page URL or affiliate link?"
@@ -402,8 +397,8 @@ export default function AutomatedProfitsPage() {
                                                         <Clipboard size={14} />
                                                         <span>Use This Description When Submitting:</span>
                                                     </div>
-                                                    <div className="bg-black/30 border border-border-dim rounded-lg p-3 flex items-center justify-between gap-3">
-                                                        <p className="text-sm text-text-secondary flex-1 break-all">
+                                                    <div className="bg-black/30 border border-border-dim rounded-lg p-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                                                        <p className="text-sm text-text-secondary flex-1 min-w-0 break-all">
                                                             {source.description.replace("{LINK}", pageUrl || "[YOUR_LINK]")}
                                                         </p>
                                                         <button
@@ -413,7 +408,7 @@ export default function AutomatedProfitsPage() {
                                                                 setTimeout(() => setCopiedDescId(null), 2000);
                                                             }}
                                                             className={clsx(
-                                                                "shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all",
+                                                                "shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all",
                                                                 copiedDescId === source.id
                                                                     ? "bg-accent text-black"
                                                                     : "bg-surface border border-border-dim text-text-secondary hover:border-accent/30"
@@ -425,7 +420,7 @@ export default function AutomatedProfitsPage() {
                                                     </div>
                                                 </div>
 
-                                                <div className="flex items-center gap-3">
+                                                <div className="flex flex-col sm:flex-row items-stretch gap-3">
                                                     <a
                                                         href={source.url}
                                                         target="_blank"
@@ -438,7 +433,7 @@ export default function AutomatedProfitsPage() {
                                                     <button
                                                         onClick={() => toggleCompleted(source.id)}
                                                         className={clsx(
-                                                            "py-2.5 px-4 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all",
+                                                            "py-2.5 px-4 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-all",
                                                             isDone
                                                                 ? "bg-accent text-black"
                                                                 : "bg-surface border border-border-dim text-text-secondary hover:border-accent/30"

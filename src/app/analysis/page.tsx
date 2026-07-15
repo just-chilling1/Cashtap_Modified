@@ -179,27 +179,27 @@ export default function AnalysisPage() {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col gap-6 max-w-6xl mx-auto w-full py-6"
+            className="page-stack-wide"
         >
             {/* Header */}
             <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex flex-col gap-1">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-accent/10 border border-accent/20 flex items-center justify-center rounded-lg">
+                    <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-10 h-10 bg-accent/10 border border-accent/20 flex items-center justify-center rounded-lg shrink-0">
                             <Brain size={20} className="text-accent" />
                         </div>
-                        <div>
-                            <h1 className="text-2xl text-text-primary font-black tracking-tight">Step 2: Check Demand</h1>
-                            <p className="text-sm text-text-muted">
+                        <div className="min-w-0">
+                            <h1 className="page-title">Step 2: Check Demand</h1>
+                            <p className="text-sm text-text-muted break-words">
                                 Topic: <span className="text-text-primary font-semibold">&ldquo;{keyword}&rdquo;</span> &middot; {variations.length} keyword ideas found
                             </p>
                         </div>
                     </div>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 sm:gap-3 w-full md:w-auto">
                     <button
                         onClick={() => setShowGuide(!showGuide)}
-                        className="flex items-center gap-2 px-3 py-2 border border-border-dim rounded-lg text-[11px] font-bold text-text-muted hover:text-text-primary hover:border-accent/30 transition-all"
+                        className="flex items-center justify-center gap-2 min-h-11 px-3 py-2 border border-border-dim rounded-lg text-[11px] font-bold text-text-muted hover:text-text-primary hover:border-accent/30 transition-all w-full sm:w-auto"
                     >
                         <Info size={13} />
                         <span>{showGuide ? "Hide Guide" : "How to Read This"}</span>
@@ -207,7 +207,7 @@ export default function AnalysisPage() {
                     <button
                         onClick={() => router.push("/radar")}
                         disabled={analyzedCount === 0}
-                        className="btn-primary h-10 px-5 text-sm rounded-lg"
+                        className="btn-primary h-11 px-5 text-sm rounded-lg w-full sm:w-auto"
                     >
                         <span>Step 3: Find Ads</span>
                         <ArrowRight size={16} />
@@ -289,8 +289,55 @@ export default function AnalysisPage() {
                 )}
             </AnimatePresence>
 
-            {/* Data Table */}
-            <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+            {/* Data Table — cards on mobile, table on md+ */}
+            <div className="md:hidden flex flex-col gap-2">
+                {sortedVariations.map((v, i) => {
+                    const data = analysisByVariation[v];
+                    const isLoading = loadingChips.has(v);
+                    const isSelected = activeChip === v;
+
+                    return (
+                        <motion.button
+                            key={v}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: i * 0.03 }}
+                            onClick={() => setActiveChip(v)}
+                            className={clsx(
+                                "w-full text-left rounded-xl border p-4 flex flex-col gap-3 transition-all min-w-0",
+                                isSelected
+                                    ? "bg-accent/5 border-accent/40"
+                                    : "bg-[#0a0a0c] border-border-dim/30 hover:border-accent/20"
+                            )}
+                        >
+                            <div className="flex items-start justify-between gap-2 min-w-0">
+                                <span className={clsx(
+                                    "text-sm font-medium break-words min-w-0",
+                                    isSelected ? "text-accent" : "text-text-primary"
+                                )}>{v}</span>
+                                {isLoading ? (
+                                    <Loader2 size={14} className="animate-spin text-text-muted shrink-0" />
+                                ) : data ? (
+                                    <LevelBadge level={data.level} />
+                                ) : null}
+                            </div>
+                            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] text-text-muted">
+                                <span>Ads: <strong className="text-text-primary">{data?.count ?? "—"}</strong></span>
+                                {data && (
+                                    <div className="flex-1 min-w-[120px] max-w-[180px]">
+                                        <ConfidenceBar value={data.confidence ?? 0} />
+                                    </div>
+                                )}
+                                {data?.type && (
+                                    <span className="truncate max-w-full">{data.type}</span>
+                                )}
+                            </div>
+                        </motion.button>
+                    );
+                })}
+            </div>
+
+            <div className="hidden md:block overflow-x-auto">
             <div className="min-w-[640px] border border-border-dim/30 rounded-xl overflow-hidden bg-[#0a0a0c]">
                 {/* Table Header */}
                 <div className="grid grid-cols-12 gap-4 px-5 py-3 bg-[#0c0c0e] border-b border-border-dim/20">
@@ -397,10 +444,10 @@ export default function AnalysisPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="bg-[#0c0c0e] border border-border-dim/30 rounded-xl p-5 flex flex-col gap-3"
                 >
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <Brain size={16} className="text-accent" />
-                            <span className="text-sm font-bold text-white">Details for &ldquo;{activeChip}&rdquo;</span>
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                        <div className="flex items-center gap-3 min-w-0">
+                            <Brain size={16} className="text-accent shrink-0" />
+                            <span className="text-sm font-bold text-white truncate">Details for &ldquo;{activeChip}&rdquo;</span>
                         </div>
                         <button
                             onClick={() => {
@@ -409,7 +456,7 @@ export default function AnalysisPage() {
                                 setAnalysisByVariation(newAnalysis);
                                 fetchAnalysis(activeChip);
                             }}
-                            className="flex items-center gap-1.5 text-[10px] font-bold text-text-muted hover:text-accent transition-colors"
+                            className="flex items-center gap-1.5 min-h-11 px-2 text-[10px] font-bold text-text-muted hover:text-accent transition-colors shrink-0"
                         >
                             <RefreshCw size={11} />
                             <span>Re-analyze</span>
@@ -426,17 +473,17 @@ export default function AnalysisPage() {
             )}
 
             {/* Continue */}
-            <div className="flex items-center justify-between pt-4">
+            <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3 pt-4">
                 <button
                     onClick={() => router.push("/search")}
-                    className="text-[11px] font-bold text-text-muted hover:text-accent transition-colors"
+                    className="text-[11px] font-bold text-text-muted hover:text-accent transition-colors min-h-11"
                 >
                     ← Back to Step 1
                 </button>
                 <button
                     onClick={() => router.push("/radar")}
                     disabled={analyzedCount === 0}
-                    className="btn-primary h-11 px-6 text-sm rounded-lg group"
+                    className="btn-primary h-11 px-6 text-sm rounded-lg group w-full sm:w-auto"
                 >
                     <span>Go to Step 3: Find Ads</span>
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />

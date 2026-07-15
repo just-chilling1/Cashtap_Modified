@@ -51,6 +51,12 @@
 }
 
 @layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   html {
     overflow-x: hidden;
     max-width: 100%;
@@ -66,13 +72,21 @@
       radial-gradient(at 100% 100%, rgba(234, 179, 8, 0.03) 0px, transparent 50%);
   }
 
+  img,
+  video,
+  iframe,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
   h1,
   h2,
   h3,
   h4,
   .brand-font {
     font-family: var(--font-brand);
-    @apply font-bold tracking-tight;
+    @apply font-bold tracking-tight break-words;
   }
 }
 
@@ -80,7 +94,7 @@
 
   /* Professional Cards */
   .card-base {
-    @apply bg-surface border border-border-dim rounded-xl p-6 transition-all duration-200;
+    @apply bg-surface border border-border-dim rounded-xl p-4 sm:p-6 transition-all duration-200;
   }
 
   .glass-card {
@@ -93,12 +107,12 @@
   }
 
   .card-interactive {
-    @apply bg-surface border border-border-dim rounded-xl p-6 transition-all duration-200 hover:border-accent/40 hover:shadow-gold cursor-pointer;
+    @apply bg-surface border border-border-dim rounded-xl p-4 sm:p-6 transition-all duration-200 hover:border-accent/40 hover:shadow-gold cursor-pointer;
   }
 
   /* Refined Buttons */
   .btn-primary {
-    @apply bg-accent text-text-on-accent px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-50;
+    @apply bg-accent text-text-on-accent px-4 sm:px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-50;
   }
 
   .btn-secondary {
@@ -139,6 +153,22 @@
 
   .subtitle {
     @apply text-text-secondary text-base leading-relaxed;
+  }
+
+  .page-stack {
+    @apply flex flex-col gap-8 max-w-5xl mx-auto w-full min-w-0;
+  }
+
+  .page-stack-wide {
+    @apply flex flex-col gap-8 max-w-6xl mx-auto w-full min-w-0;
+  }
+
+  .page-title {
+    @apply text-2xl sm:text-3xl text-text-primary font-black tracking-tight;
+  }
+
+  .section-title {
+    @apply text-xl font-bold text-text-primary;
   }
 }
 

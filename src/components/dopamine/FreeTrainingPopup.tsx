@@ -106,7 +106,7 @@ export function FreeTrainingPopup() {
                                 <X size={18} strokeWidth={2} />
                             </button>
 
-                            <div className="relative z-10 px-10 pt-10 pb-8 flex flex-col items-center text-center">
+                            <div className="relative z-10 px-5 sm:px-10 pt-8 sm:pt-10 pb-8 flex flex-col items-center text-center">
                                 {/* Trophy */}
                                 <div
                                     className="w-[76px] h-[76px] rounded-full flex items-center justify-center -mt-1 mb-5"

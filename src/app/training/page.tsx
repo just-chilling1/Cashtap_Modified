@@ -1,24 +1,77 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     GraduationCap, Play, Search, Brain, Radar, MessageSquare,
     ChevronDown, ChevronUp, ArrowRight, Lightbulb, HelpCircle,
     CheckCircle2, Target, Copy, ExternalLink, DollarSign, Zap,
-    BookOpen, Star
+    BookOpen, Star, Clock, MonitorPlay
 } from "lucide-react";
+import { VideoEmbed } from "@/components/ui/LazyIframe";
+import { clsx } from "clsx";
 
-const VIDEOS = [
+const WATCHED_STORAGE_KEY = "cashtap_training_watched";
+type VideoFilter = "all" | "core" | "premium";
+
+const VIDEOS: {
+    id: string;
+    title: string;
+    description: string;
+    duration: string;
+    thumbnail?: string;
+}[] = [
     {
         id: "1171473195",
         title: "Getting Started with CashTap AI",
         description: "Watch this first. Learn the basics — how to search for a topic, check demand, find ads, and create replies that earn commissions.",
+        duration: "2 min",
+        thumbnail: "/training/watch-training-1.png",
     },
     {
         id: "1171474608",
         title: "Advanced Strategies & Tips",
         description: "Go deeper. Learn how to pick the best keywords, find high-value ads, and write replies that get more clicks on your affiliate link.",
+        duration: "2 min",
+        thumbnail: "/training/watch-training-2.png",
+    },
+];
+
+const PREMIUM_VIDEOS: {
+    id: string;
+    label: string;
+    title: string;
+    description: string;
+    duration: string;
+    embedTitle: string;
+    thumbnail?: string;
+}[] = [
+    {
+        id: "1171728175",
+        label: "Premium Feature 1",
+        title: "Done For You",
+        description: "Learn how to use the Done-For-You feature to pick a keyword, add your link, and get ready-made replies to post and earn.",
+        duration: "1 min",
+        embedTitle: "Premium Feature 1: Done For You",
+        thumbnail: "/training/watch-training-3.png",
+    },
+    {
+        id: "1171734563",
+        label: "Premium Feature 2",
+        title: "Automated Profits",
+        description: "Learn how to use the Automated Profits feature to submit your link to 100+ traffic sources and get automated traffic forever.",
+        duration: "1 min",
+        embedTitle: "Premium Feature 2: Automated Profits",
+        thumbnail: "/training/watch-training-4.png",
+    },
+    {
+        id: "1171721099",
+        label: "Premium Feature 3",
+        title: "Instant Income",
+        description: "Learn how to use the Instant Income feature to copy proven Facebook posts and start earning commissions right away.",
+        duration: "1 min",
+        embedTitle: "Premium Feature 3: Instant Access",
+        thumbnail: "/training/watch-training-5.png",
     },
 ];
 
@@ -29,6 +82,7 @@ const STEPS_GUIDE = [
         icon: Search,
         page: "/search",
         description: "Type any topic you want to promote. It can be a product category, a niche, or a problem people have.",
+        duration: "~30 sec",
         tips: [
             "Keep it simple — one or two words work best (e.g. \"weight loss\", \"dog food\")",
             "Think about what your affiliate product solves",
@@ -42,6 +96,7 @@ const STEPS_GUIDE = [
         icon: Brain,
         page: "/analysis",
         description: "We analyze how active each topic is on Reddit and YouTube. The table shows you which keywords have the most demand.",
+        duration: "~30 sec",
         tips: [
             "Look for keywords with \"High\" demand — they have the most conversations",
             "Higher confidence means more reliable data",
@@ -56,6 +111,7 @@ const STEPS_GUIDE = [
         icon: Radar,
         page: "/radar",
         description: "Browse real ads and conversations from Reddit and YouTube. Click to select the ones you want to reply to.",
+        duration: "1 min",
         tips: [
             "Select ads with high engagement — more people will see your reply",
             "Pick at least 3 ads for the best results",
@@ -70,6 +126,7 @@ const STEPS_GUIDE = [
         icon: MessageSquare,
         page: "/replies",
         description: "Our AI writes 3 different reply styles for each ad. Just copy the one you like and paste it under the ad.",
+        duration: "1 min",
         tips: [
             "Paste your affiliate link in the box at the top — it gets inserted into replies",
             "\"Curiosity Hook\" replies tend to get the most clicks",
@@ -292,6 +349,82 @@ const PRO_TIPS = [
     { icon: Star, title: "Be helpful first", text: "Replies that genuinely answer the question AND include your link perform 3x better than spammy ones." },
 ];
 
+function DurationBadge({ duration }: { duration: string }) {
+    return (
+        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-text-muted uppercase tracking-wider bg-white/5 border border-white/10 px-2 py-0.5 rounded-md shrink-0">
+            <Clock size={10} className="text-accent" />
+            {duration}
+        </span>
+    );
+}
+
+function TrainingVideoCard({
+    id,
+    eyebrow,
+    title,
+    description,
+    thumbnail,
+    watched,
+    onToggleWatched,
+    delay = 0,
+}: {
+    id: string;
+    eyebrow: string;
+    title: string;
+    description: string;
+    thumbnail?: string;
+    watched: boolean;
+    onToggleWatched: (id: string) => void;
+    delay?: number;
+}) {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay }}
+            className="border border-border-dim/30 rounded-xl overflow-hidden bg-[#0c0c0e] p-4 sm:p-5"
+        >
+            <div className="flex flex-col lg:flex-row gap-5 lg:gap-8 min-w-0">
+                <div className="w-full lg:w-[58%] flex flex-col gap-3 min-w-0">
+                    <div className="rounded-lg overflow-hidden border border-border-dim/20">
+                        <VideoEmbed
+                            src={`https://player.vimeo.com/video/${id}?autopause=0&player_id=0&app_id=58479`}
+                            title={title}
+                            wrapperClassName="bg-black"
+                            poster={thumbnail}
+                        />
+                    </div>
+                </div>
+
+                <div className="w-full lg:w-[42%] flex flex-col justify-center gap-3 min-w-0">
+                    <span className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em]">
+                        {eyebrow}
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-black text-white uppercase tracking-tight leading-snug break-words">
+                        {title}
+                    </h3>
+                    <p className="text-sm text-text-secondary leading-relaxed">
+                        {description}
+                    </p>
+                    <button
+                        type="button"
+                        onClick={() => onToggleWatched(id)}
+                        className={clsx(
+                            "mt-2 inline-flex items-center justify-center gap-2 self-start min-h-11 px-4 py-2.5 rounded-lg text-sm font-bold transition-all",
+                            watched
+                                ? "bg-green-500/15 border border-green-500/30 text-green-400 hover:bg-green-500/20"
+                                : "bg-accent text-text-on-accent hover:opacity-90 shadow-gold"
+                        )}
+                    >
+                        <CheckCircle2 size={16} />
+                        <span>{watched ? "Watched" : "Mark as watched"}</span>
+                    </button>
+                </div>
+            </div>
+        </motion.div>
+    );
+}
+
 function FAQItem({ q, a }: { q: string; a: string }) {
     const [open, setOpen] = useState(false);
     return (
@@ -326,11 +459,52 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 }
 
 export default function TrainingPage() {
+    const [filter, setFilter] = useState<VideoFilter>("all");
+    const [watchedIds, setWatchedIds] = useState<Set<string>>(new Set());
+
+    const coreCount = VIDEOS.length;
+    const premiumCount = PREMIUM_VIDEOS.length;
+    const totalVideos = coreCount + premiumCount;
+    const allVideoIds = [...VIDEOS.map((v) => v.id), ...PREMIUM_VIDEOS.map((v) => v.id)];
+    const watchedCount = allVideoIds.filter((id) => watchedIds.has(id)).length;
+    const progressPercent = totalVideos === 0 ? 0 : Math.round((watchedCount / totalVideos) * 100);
+
+    useEffect(() => {
+        try {
+            const saved = localStorage.getItem(WATCHED_STORAGE_KEY);
+            if (saved) {
+                const parsed = JSON.parse(saved) as string[];
+                if (Array.isArray(parsed)) setWatchedIds(new Set(parsed));
+            }
+        } catch {
+            // ignore corrupt storage
+        }
+    }, []);
+
+    const toggleWatched = (id: string) => {
+        setWatchedIds((prev) => {
+            const next = new Set(prev);
+            if (next.has(id)) next.delete(id);
+            else next.add(id);
+            localStorage.setItem(WATCHED_STORAGE_KEY, JSON.stringify([...next]));
+            return next;
+        });
+    };
+
+    const filters: { id: VideoFilter; label: string }[] = [
+        { id: "all", label: `All (${totalVideos})` },
+        { id: "core", label: `Core Feature (${coreCount})` },
+        { id: "premium", label: `Premium (${premiumCount})` },
+    ];
+
+    const showCore = filter === "all" || filter === "core";
+    const showPremium = filter === "all" || filter === "premium";
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col gap-12 max-w-5xl mx-auto w-full py-6"
+            className="page-stack"
         >
             {/* Header */}
             <header className="flex flex-col gap-2">
@@ -339,149 +513,131 @@ export default function TrainingPage() {
                         <GraduationCap size={20} className="text-accent" />
                     </div>
                     <div>
-                        <h1 className="text-2xl text-text-primary font-black tracking-tight">Training</h1>
-                        <p className="text-sm text-text-muted">Everything you need to start earning with CashTap AI.</p>
+                        <h1 className="page-title">Training</h1>
+                        <p className="subtitle">
+                            Everything you need to start earning with CashTap AI.
+                            <span className="text-text-secondary"> · ~9 min total</span>
+                        </p>
                     </div>
                 </div>
             </header>
 
-            {/* Video Training */}
-            <section className="flex flex-col gap-6">
-                <div className="flex items-center gap-2">
-                    <Play size={16} className="text-accent" />
-                    <h2 className="text-lg font-bold text-white">Video Training</h2>
-                    <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest ml-2">Watch these first</span>
+            {/* Overview: stats, progress, filters */}
+            <section className="flex flex-col gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="card-base flex items-center gap-3 p-4!">
+                        <div className="w-10 h-10 rounded-lg bg-accent/15 flex items-center justify-center shrink-0">
+                            <MonitorPlay size={18} className="text-accent" />
+                        </div>
+                        <div className="flex flex-col min-w-0">
+                            <span className="text-2xl font-black text-text-primary leading-none">{totalVideos}</span>
+                            <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest mt-1">Total Videos</span>
+                        </div>
+                    </div>
+                    <div className="card-base flex items-center gap-3 p-4!">
+                        <div className="w-10 h-10 rounded-lg bg-green-500/15 flex items-center justify-center shrink-0">
+                            <Star size={18} className="text-green-400" />
+                        </div>
+                        <div className="flex flex-col min-w-0">
+                            <span className="text-lg sm:text-xl font-black text-text-primary leading-none">All Features</span>
+                            <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest mt-1">Covered</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {VIDEOS.map((video, i) => (
-                        <motion.div
-                            key={video.id}
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.1 }}
-                            className="border border-border-dim/30 rounded-xl overflow-hidden bg-[#0c0c0e]"
+                <div className="card-base flex flex-col gap-3 p-4!">
+                    <div className="flex items-center justify-between gap-3">
+                        <p className="text-sm text-text-secondary">
+                            Progress: <span className="text-text-primary font-semibold">{watchedCount}</span> of{" "}
+                            <span className="text-text-primary font-semibold">{totalVideos}</span> watched
+                        </p>
+                        <span className="text-sm font-bold text-accent tabular-nums">{progressPercent}%</span>
+                    </div>
+                    <div className="h-1.5 w-full rounded-full bg-border-dim/60 overflow-hidden">
+                        <div
+                            className="h-full rounded-full bg-accent transition-all duration-500"
+                            style={{ width: `${progressPercent}%` }}
+                        />
+                    </div>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                    {filters.map((f) => (
+                        <button
+                            key={f.id}
+                            type="button"
+                            onClick={() => setFilter(f.id)}
+                            className={clsx(
+                                "px-4 py-2 rounded-lg text-sm font-bold transition-all",
+                                filter === f.id
+                                    ? "bg-accent text-text-on-accent shadow-gold"
+                                    : "bg-surface border border-border-dim text-text-secondary hover:text-text-primary hover:border-accent/30"
+                            )}
                         >
-                            <div className="relative w-full bg-black" style={{ paddingBottom: "56.25%" }}>
-                                <iframe
-                                    src={`https://player.vimeo.com/video/${video.id}?badge=0&autopause=0&player_id=0&app_id=58479`}
-                                    className="absolute inset-0 w-full h-full"
-                                    frameBorder="0"
-                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                                    allowFullScreen
-                                    title={video.title}
-                                />
-                            </div>
-                            <div className="p-4 flex flex-col gap-1.5">
-                                <div className="flex items-center gap-2">
-                                    <span className="text-[9px] font-bold text-accent uppercase tracking-widest bg-accent/10 px-2 py-0.5 rounded">
-                                        Video {i + 1}
-                                    </span>
-                                </div>
-                                <h3 className="text-sm font-bold text-white">{video.title}</h3>
-                                <p className="text-[12px] text-text-muted leading-relaxed">{video.description}</p>
-                            </div>
-                        </motion.div>
+                            {f.label}
+                        </button>
                     ))}
                 </div>
             </section>
 
+            {/* Video Training */}
+            {showCore && (
+            <section className="flex flex-col gap-6">
+                <div className="flex items-center gap-2">
+                    <Play size={16} className="text-accent" />
+                    <h2 className="section-title">Video Training</h2>
+                    <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest ml-2">Watch these first</span>
+                </div>
+
+                <div className="flex flex-col gap-5">
+                    {VIDEOS.map((video, i) => (
+                        <TrainingVideoCard
+                            key={video.id}
+                            id={video.id}
+                            eyebrow={`Quick Start Training · Video ${i + 1}`}
+                            title={video.title}
+                            description={video.description}
+                            thumbnail={video.thumbnail}
+                            watched={watchedIds.has(video.id)}
+                            onToggleWatched={toggleWatched}
+                            delay={i * 0.1}
+                        />
+                    ))}
+                </div>
+            </section>
+            )}
+
             {/* Premium Features */}
+            {showPremium && (
             <section className="flex flex-col gap-6">
                 <div className="flex items-center gap-2">
                     <Star size={16} className="text-accent" />
-                    <h2 className="text-lg font-bold text-white">Premium Features</h2>
+                    <h2 className="section-title">Premium Features</h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.05 }}
-                        className="border border-border-dim/30 rounded-xl overflow-hidden bg-[#0c0c0e]"
-                    >
-                        <div className="relative w-full bg-black" style={{ paddingBottom: "56.25%" }}>
-                            <iframe
-                                src="https://player.vimeo.com/video/1171728175?badge=0&autopause=0&player_id=0&app_id=58479"
-                                className="absolute inset-0 w-full h-full"
-                                frameBorder="0"
-                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                                allowFullScreen
-                                title="Premium Feature 1: Done For You"
-                            />
-                        </div>
-                        <div className="p-4 flex flex-col gap-1.5">
-                            <div className="flex items-center gap-2">
-                                <span className="text-[9px] font-bold text-accent uppercase tracking-widest bg-accent/10 px-2 py-0.5 rounded">
-                                    Premium Feature 1
-                                </span>
-                            </div>
-                            <h3 className="text-sm font-bold text-white">Done For You</h3>
-                            <p className="text-[12px] text-text-muted leading-relaxed">Learn how to use the Done-For-You feature to pick a keyword, add your link, and get ready-made replies to post and earn.</p>
-                        </div>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="border border-border-dim/30 rounded-xl overflow-hidden bg-[#0c0c0e]"
-                    >
-                        <div className="relative w-full bg-black" style={{ paddingBottom: "56.25%" }}>
-                            <iframe
-                                src="https://player.vimeo.com/video/1171734563?badge=0&autopause=0&player_id=0&app_id=58479"
-                                className="absolute inset-0 w-full h-full"
-                                frameBorder="0"
-                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                                allowFullScreen
-                                title="Premium Feature 2: Automated Profits"
-                            />
-                        </div>
-                        <div className="p-4 flex flex-col gap-1.5">
-                            <div className="flex items-center gap-2">
-                                <span className="text-[9px] font-bold text-accent uppercase tracking-widest bg-accent/10 px-2 py-0.5 rounded">
-                                    Premium Feature 2
-                                </span>
-                            </div>
-                            <h3 className="text-sm font-bold text-white">Automated Profits</h3>
-                            <p className="text-[12px] text-text-muted leading-relaxed">Learn how to use the Automated Profits feature to submit your link to 100+ traffic sources and get automated traffic forever.</p>
-                        </div>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.15 }}
-                        className="border border-border-dim/30 rounded-xl overflow-hidden bg-[#0c0c0e]"
-                    >
-                        <div className="relative w-full bg-black" style={{ paddingBottom: "56.25%" }}>
-                            <iframe
-                                src="https://player.vimeo.com/video/1171721099?badge=0&autopause=0&player_id=0&app_id=58479"
-                                className="absolute inset-0 w-full h-full"
-                                frameBorder="0"
-                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                                allowFullScreen
-                                title="Premium Feature 3: Instant Access"
-                            />
-                        </div>
-                        <div className="p-4 flex flex-col gap-1.5">
-                            <div className="flex items-center gap-2">
-                                <span className="text-[9px] font-bold text-accent uppercase tracking-widest bg-accent/10 px-2 py-0.5 rounded">
-                                    Premium Feature 3
-                                </span>
-                            </div>
-                            <h3 className="text-sm font-bold text-white">Instant Income</h3>
-                            <p className="text-[12px] text-text-muted leading-relaxed">Learn how to use the Instant Income feature to copy proven Facebook posts and start earning commissions right away.</p>
-                        </div>
-                    </motion.div>
+                <div className="flex flex-col gap-5">
+                    {PREMIUM_VIDEOS.map((video, i) => (
+                        <TrainingVideoCard
+                            key={video.id}
+                            id={video.id}
+                            eyebrow={video.label}
+                            title={video.title}
+                            description={video.description}
+                            thumbnail={video.thumbnail}
+                            watched={watchedIds.has(video.id)}
+                            onToggleWatched={toggleWatched}
+                            delay={0.05 + i * 0.05}
+                        />
+                    ))}
                 </div>
             </section>
+            )}
 
             {/* Step-by-Step Guide */}
             <section className="flex flex-col gap-6">
                 <div className="flex items-center gap-2">
                     <BookOpen size={16} className="text-accent" />
-                    <h2 className="text-lg font-bold text-white">Step-by-Step Guide</h2>
+                    <h2 className="section-title">Step-by-Step Guide</h2>
                 </div>
 
                 <div className="flex flex-col gap-4">
@@ -499,9 +655,10 @@ export default function TrainingPage() {
                                     <div className="w-10 h-10 bg-accent/10 border border-accent/20 rounded-lg flex items-center justify-center shrink-0">
                                         <Icon size={18} className="text-accent" />
                                     </div>
-                                    <div className="flex flex-col gap-1 flex-1">
-                                        <div className="flex items-center gap-2">
+                                    <div className="flex flex-col gap-1 flex-1 min-w-0">
+                                        <div className="flex items-center gap-2 flex-wrap">
                                             <span className="text-[9px] font-bold text-accent uppercase tracking-widest">Step {s.step}</span>
+                                            <DurationBadge duration={s.duration} />
                                         </div>
                                         <h3 className="text-base font-bold text-white">{s.title}</h3>
                                         <p className="text-[13px] text-text-secondary leading-relaxed">{s.description}</p>
@@ -509,13 +666,13 @@ export default function TrainingPage() {
                                 </div>
 
                                 {/* Tips */}
-                                <div className="pl-14 flex flex-col gap-3">
+                                <div className="pl-0 sm:pl-14 flex flex-col gap-3 min-w-0">
                                     <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Tips</p>
                                     <div className="flex flex-col gap-2">
                                         {s.tips.map((tip, j) => (
-                                            <div key={j} className="flex items-start gap-2">
+                                            <div key={j} className="flex items-start gap-2 min-w-0">
                                                 <CheckCircle2 size={12} className="text-green-400 shrink-0 mt-0.5" />
-                                                <span className="text-[12px] text-text-secondary leading-relaxed">{tip}</span>
+                                                <span className="text-[12px] text-text-secondary leading-relaxed break-words">{tip}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -541,7 +698,7 @@ export default function TrainingPage() {
             <section className="flex flex-col gap-6">
                 <div className="flex items-center gap-2">
                     <Zap size={16} className="text-accent" />
-                    <h2 className="text-lg font-bold text-white">Pro Tips for More Earnings</h2>
+                    <h2 className="section-title">Pro Tips for More Earnings</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -572,7 +729,7 @@ export default function TrainingPage() {
             <section className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
                     <CheckCircle2 size={16} className="text-green-400" />
-                    <h2 className="text-lg font-bold text-white">Quick Start Checklist</h2>
+                    <h2 className="section-title">Quick Start Checklist</h2>
                 </div>
 
                 <div className="border border-green-500/15 rounded-xl bg-green-500/3 p-5 flex flex-col gap-3">
@@ -599,7 +756,7 @@ export default function TrainingPage() {
             <section className="flex flex-col gap-8">
                 <div className="flex items-center gap-2">
                     <HelpCircle size={16} className="text-accent" />
-                    <h2 className="text-lg font-bold text-white">Frequently Asked Questions</h2>
+                    <h2 className="section-title">Frequently Asked Questions</h2>
                     <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest ml-2">{FAQ_SECTIONS.reduce((acc, s) => acc + s.items.length, 0)} answers</span>
                 </div>
 

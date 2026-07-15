@@ -44,7 +44,7 @@ export function SuccessCelebration({ show, title, subtitle, onDone }: SuccessCel
                     <motion.div
                         initial={{ y: 30 }}
                         animate={{ y: 0 }}
-                        className="relative flex flex-col items-center gap-5 bg-[#111113] border border-accent/30 rounded-3xl p-10 shadow-[0_0_60px_rgba(234,179,8,0.15)] max-w-sm"
+                        className="relative flex flex-col items-center gap-5 bg-[#111113] border border-accent/30 rounded-3xl p-6 sm:p-10 shadow-[0_0_60px_rgba(234,179,8,0.15)] max-w-sm mx-4 w-full"
                     >
                         <div className="relative">
                             {Array.from({ length: 20 }).map((_, i) => (

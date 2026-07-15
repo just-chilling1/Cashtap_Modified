@@ -58,7 +58,7 @@ export default function SearchPage() {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col items-center justify-center min-h-[70vh] gap-10 max-w-xl mx-auto w-full"
+            className="flex flex-col items-center justify-center min-h-[70vh] gap-8 max-w-xl mx-auto w-full min-w-0 px-0"
         >
             <SuccessCelebration
                 show={showCelebration}
@@ -73,14 +73,14 @@ export default function SearchPage() {
                     <Zap size={12} className="text-accent" />
                     <span className="text-[10px] font-bold text-accent uppercase tracking-wider">Step 1 of 4</span>
                 </div>
-                <h1 className="text-3xl text-text-primary font-black tracking-tight inline-flex items-center gap-2">
+                <h1 className="page-title flex flex-wrap items-center justify-center gap-2">
                     Enter Your Ad Topic
                     <InfoHint
                         label="What is an ad topic?"
                         text="A topic is just the subject people are searching for — like 'weight loss' or 'dog food'. Pick one thing you want to promote."
                     />
                 </h1>
-                <p className="text-sm text-text-muted max-w-md">
+                <p className="subtitle max-w-md text-center">
                     Type one topic below. We will find related ads and conversations from Reddit and YouTube.
                 </p>
             </div>
@@ -148,13 +148,13 @@ export default function SearchPage() {
             {/* How it works — inline help */}
             <div className="w-full border-t border-border-dim/30 pt-6">
                 <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest mb-3">How it works</p>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                     {[
                         { step: "1", text: "Type a topic" },
                         { step: "2", text: "We find ads" },
                         { step: "3", text: "You copy & earn" },
                     ].map((s) => (
-                        <div key={s.step} className="flex items-center gap-2.5">
+                        <div key={s.step} className="flex items-center gap-2.5 min-w-0">
                             <div className="w-6 h-6 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
                                 <span className="text-[10px] font-black text-accent">{s.step}</span>
                             </div>

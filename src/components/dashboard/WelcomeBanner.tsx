@@ -8,29 +8,29 @@ export function WelcomeBanner() {
         <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="w-full relative overflow-hidden rounded-2xl border border-border-dim bg-panel p-8 md:p-10 shadow-lg"
+            className="w-full relative overflow-hidden rounded-2xl border border-border-dim bg-panel p-4 sm:p-8 md:p-10 shadow-lg"
         >
-            <div className="absolute top-0 right-0 w-[40%] h-full bg-linear-to-l from-brand-tint to-transparent pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[40%] max-w-full h-full bg-linear-to-l from-brand-tint to-transparent pointer-events-none" />
 
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-10 relative z-10">
-                <div className="flex flex-col gap-6 max-w-lg">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-10 relative z-10 min-w-0">
+                <div className="flex flex-col gap-6 max-w-lg min-w-0 w-full">
                     <div className="flex flex-col gap-3">
-                        <h2 className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary tracking-tight break-words">
                             Welcome to <span className="text-accent underline decoration-accent/20">CashTap AI</span>
                         </h2>
-                        <p className="text-text-secondary text-base leading-relaxed">
+                        <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
                             Learn how to discover high-potential discussions and generate natural responses that convert in just 3 minutes.
                         </p>
                     </div>
 
-                    <button className="btn-primary w-fit shadow-lg shadow-accent/10">
+                    <button className="btn-primary w-full sm:w-fit shadow-lg shadow-accent/10">
                         <Sparkles size={18} />
                         <span>Quick Start Video</span>
                     </button>
                 </div>
 
                 {/* Video Placeholder */}
-                <div className="w-full lg:w-[400px] aspect-video bg-page border border-border-dim rounded-xl flex items-center justify-center relative group cursor-pointer overflow-hidden shadow-2xl transition-all hover:border-accent/30">
+                <div className="w-full lg:w-[400px] max-w-full aspect-video bg-page border border-border-dim rounded-xl flex items-center justify-center relative group cursor-pointer overflow-hidden shadow-2xl transition-all hover:border-accent/30">
                     <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1639322537228-ad7155463fb2?q=80&w=2564&auto=format&fit=crop')] bg-cover bg-center opacity-20 grayscale group-hover:opacity-40 transition-opacity" />
 
                     <motion.div

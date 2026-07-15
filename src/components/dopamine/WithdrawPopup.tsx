@@ -35,7 +35,7 @@ export function WithdrawPopup({ onVisibilityChange }: { onVisibilityChange?: (vi
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 40, scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                    className="fixed bottom-6 left-6 z-[60] w-[380px] max-w-[calc(100vw-3rem)]"
+                    className="fixed bottom-20 left-4 right-4 z-[60] w-auto max-w-sm md:bottom-6 md:left-6 md:right-auto md:w-[380px]"
                 >
                     <div className="relative overflow-hidden rounded-2xl border border-green-500/30 bg-[#0c0e0c] shadow-[0_25px_70px_rgba(0,0,0,0.9),0_0_40px_rgba(34,197,94,0.15)]">
                         {/* Glow effect */}
@@ -45,7 +45,7 @@ export function WithdrawPopup({ onVisibilityChange }: { onVisibilityChange?: (vi
                         {/* Close button */}
                         <button
                             onClick={(e) => { e.stopPropagation(); handleClose(); }}
-                            className="absolute top-3 right-3 w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-text-muted hover:text-white transition-all z-20 cursor-pointer"
+                            className="absolute top-3 right-3 w-11 h-11 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-text-muted hover:text-white transition-all z-20 cursor-pointer"
                         >
                             <X size={14} />
                         </button>

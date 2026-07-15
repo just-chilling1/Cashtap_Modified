@@ -35,7 +35,7 @@ export default function ForgotPasswordPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6 relative overflow-hidden">
+        <div className="min-h-screen bg-[#050505] flex items-center justify-center p-4 sm:p-6 relative overflow-x-hidden overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#D4AF37]/5 rounded-full blur-[120px]" />
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#D4AF37]/5 rounded-full blur-[120px]" />
@@ -44,9 +44,9 @@ export default function ForgotPasswordPage() {
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="w-full max-w-md relative z-10"
+                className="w-full max-w-md relative z-10 min-w-0"
             >
-                <div className="glass-card p-10 flex flex-col gap-8 border-[#141414] shadow-2xl">
+                <div className="glass-card p-5 sm:p-10 flex flex-col gap-6 sm:gap-8 border-[#141414] shadow-2xl">
                     <div className="flex flex-col items-center gap-4 text-center">
                         <div className="w-16 h-16 bg-accent flex items-center justify-center rounded-xl shadow-gold">
                             <Target size={32} className="text-black" />

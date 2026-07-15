@@ -113,17 +113,17 @@ export function EarningsTestimonials() {
 
     return (
         <div className="flex flex-col gap-6">
-            <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center shrink-0">
                         <DollarSign size={16} className="text-accent" />
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col min-w-0">
                         <span className="text-sm font-bold text-white">Real Members, Real Earnings</span>
                         <span className="text-[10px] text-text-muted uppercase tracking-widest">Verified results from our community</span>
                     </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 shrink-0">
                     <button onClick={() => setPage(p => (p - 1 + totalPages) % totalPages)} className="w-7 h-7 rounded-lg bg-surface border border-border-dim flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/30 transition-all">
                         <ChevronLeft size={14} />
                     </button>
@@ -152,20 +152,20 @@ export function EarningsTestimonials() {
                             className="card-base flex flex-col gap-4 hover:border-accent/20 transition-all relative"
                         >
                             <Quote size={32} className="absolute top-4 right-4 text-accent/5" />
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-3">
-                                    <div className={`w-10 h-10 ${t.color} rounded-full flex items-center justify-center text-white text-xs font-black relative`}>
+                            <div className="flex flex-wrap items-center justify-between gap-2">
+                                <div className="flex items-center gap-3 min-w-0">
+                                    <div className={`w-10 h-10 ${t.color} rounded-full flex items-center justify-center text-white text-xs font-black relative shrink-0`}>
                                         {t.avatar}
                                         <BadgeCheck size={12} className="absolute -bottom-0.5 -right-0.5 text-blue-400 fill-[#111113]" />
                                     </div>
-                                    <div className="flex flex-col">
+                                    <div className="flex flex-col min-w-0">
                                         <div className="flex items-center gap-1.5">
                                             <span className="text-sm font-bold text-white">{t.name}</span>
                                         </div>
                                         <span className="text-[10px] text-text-muted">{t.location} · {t.niche}</span>
                                     </div>
                                 </div>
-                                <div className="bg-green-500/10 border border-green-500/20 px-3 py-1 rounded-full">
+                                <div className="bg-green-500/10 border border-green-500/20 px-3 py-1 rounded-full shrink-0">
                                     <span className="text-green-400 text-xs font-black">{t.earning}</span>
                                 </div>
                             </div>

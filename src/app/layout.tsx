@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-[#050505] text-white selection:bg-[#D4AF37]/30">
+            <body className="bg-[#050505] text-white selection:bg-[#D4AF37]/30 overflow-x-hidden">
         <SearchProvider>
           <Shell>
             {children}

@@ -127,7 +127,7 @@ export default function RepliesPage() {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col gap-6 max-w-5xl mx-auto w-full py-6"
+            className="page-stack"
         >
             <SuccessCelebration
                 show={showCelebration}
@@ -150,7 +150,7 @@ export default function RepliesPage() {
                             <MessageSquare size={20} className="text-accent" />
                         </div>
                         <div>
-                            <h1 className="text-2xl text-text-primary font-black tracking-tight">Step 4: Create Replies</h1>
+                            <h1 className="page-title">Step 4: Create Replies</h1>
                             <p className="text-sm text-text-muted">
                                 {currentAds.length} ad{currentAds.length !== 1 ? "s" : ""} selected for &ldquo;{keyword}&rdquo;
                             </p>
@@ -159,12 +159,12 @@ export default function RepliesPage() {
                 </div>
 
                 {/* Affiliate link */}
-                <div className="flex items-center gap-3 p-3 bg-[#0c0c0e] border border-border-dim/30 rounded-xl">
+                <div className="flex items-center gap-2 sm:gap-3 p-3 bg-[#0c0c0e] border border-border-dim/30 rounded-xl min-w-0">
                     <LinkIcon size={14} className="text-text-muted shrink-0" />
                     <input
                         type="text"
-                        placeholder="Paste your affiliate link here (optional — it gets inserted into replies)"
-                        className="bg-transparent border-none outline-none text-sm text-text-primary placeholder:text-text-muted/50 flex-1"
+                        placeholder="Paste your affiliate link here (optional)"
+                        className="bg-transparent border-none outline-none text-sm text-text-primary placeholder:text-text-muted/50 flex-1 min-w-0 w-full"
                         value={affiliateLink}
                         onChange={(e) => setAffiliateLink(e.target.value)}
                     />
@@ -191,9 +191,9 @@ export default function RepliesPage() {
                             className="border border-border-dim/30 rounded-xl bg-[#0c0c0e] overflow-hidden"
                         >
                             {/* Ad header */}
-                            <div className="p-4 flex items-start justify-between gap-3">
+                            <div className="p-4 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                                 <div className="flex flex-col gap-2 flex-1 min-w-0">
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex items-center gap-2 flex-wrap">
                                         <PlatformBadge platform={post.platform} />
                                         <span className="text-[9px] text-text-muted">
                                             {typeof post.engagement === 'number'
@@ -201,14 +201,14 @@ export default function RepliesPage() {
                                                 : post.engagement || "Trending"}
                                         </span>
                                     </div>
-                                    <p className="text-[13px] text-text-primary leading-relaxed font-medium line-clamp-2">
+                                    <p className="text-[13px] text-text-primary leading-relaxed font-medium line-clamp-2 break-words">
                                         {post.title || post.text}
                                     </p>
                                 </div>
-                                <div className="flex items-center gap-1.5 shrink-0">
+                                <div className="flex items-center gap-1.5 shrink-0 self-end sm:self-auto">
                                     <button
                                         onClick={() => removePost(post.id)}
-                                        className="w-10 h-10 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-text-muted hover:text-red-500 hover:bg-red-500/10 transition-all"
+                                        className="w-11 h-11 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-text-muted hover:text-red-500 hover:bg-red-500/10 transition-all"
                                         title="Remove ad"
                                     >
                                         <Trash2 size={13} />
@@ -217,7 +217,7 @@ export default function RepliesPage() {
                                         href={post.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 border border-accent/20 text-[10px] font-bold text-accent hover:bg-accent/20 transition-all"
+                                        className="shrink-0 flex items-center gap-1.5 min-h-11 px-3 py-1.5 rounded-lg bg-accent/10 border border-accent/20 text-[10px] font-bold text-accent hover:bg-accent/20 transition-all"
                                     >
                                         <ExternalLink size={11} />
                                         <span>Go to Post</span>
@@ -325,15 +325,15 @@ export default function RepliesPage() {
             </div>
 
             {/* Footer nav */}
-            <div className="flex items-center justify-between pt-4 border-t border-border-dim/20">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-4 border-t border-border-dim/20">
                 <button
                     onClick={() => router.push("/radar")}
-                    className="flex items-center gap-2 text-[11px] font-bold text-text-muted hover:text-accent transition-colors"
+                    className="flex items-center gap-2 text-[11px] font-bold text-text-muted hover:text-accent transition-colors min-h-11"
                 >
                     <ArrowLeft size={14} />
                     <span>Back to Step 3</span>
                 </button>
-                <p className="text-[10px] text-text-muted inline-flex items-center gap-1">
+                <p className="text-[10px] text-text-muted flex flex-wrap items-center gap-1 min-w-0">
                     Copy a reply → paste it under the ad → include your link → earn commissions
                     <InfoHint
                         label="What is a commission?"

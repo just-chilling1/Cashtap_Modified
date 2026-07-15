@@ -151,7 +151,7 @@ export default function RadarPage() {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col gap-6 max-w-6xl mx-auto w-full py-6"
+            className="page-stack-wide"
         >
             {/* Header */}
             <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -160,15 +160,15 @@ export default function RadarPage() {
                         <Radar size={20} className="text-accent" />
                     </div>
                     <div>
-                        <h1 className="text-2xl text-text-primary font-black tracking-tight">Step 3: Find Ads</h1>
+                        <h1 className="page-title">Step 3: Find Ads</h1>
                         <p className="text-sm text-text-muted">
                             Click ads to select them, then create replies in the next step.
                         </p>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                    <div className="flex flex-col items-end px-3 border-r border-border-dim/30">
+                <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                    <div className="flex flex-col items-start sm:items-end px-3 sm:border-r border-border-dim/30">
                         <span className="text-[9px] font-bold text-text-muted uppercase tracking-widest">Selected</span>
                         <span className="text-lg font-black text-accent tabular-nums">{selectedAds.length}</span>
                     </div>
@@ -176,7 +176,7 @@ export default function RadarPage() {
                         onClick={() => router.push("/replies")}
                         disabled={selectedAds.length === 0}
                         className={clsx(
-                            "btn-primary h-10 px-5 text-sm rounded-lg group",
+                            "btn-primary h-11 px-5 text-sm rounded-lg group w-full sm:w-auto",
                             selectedAds.length === 0 && "opacity-40 grayscale pointer-events-none"
                         )}
                     >

@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { clsx } from "clsx";
 import { InfoHint } from "@/components/ui/InfoHint";
+import { VideoEmbed } from "@/components/ui/LazyIframe";
 
 const NICHES = [
     "All Niches",
@@ -151,19 +152,19 @@ export default function InstantIncomePage() {
         <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex flex-col gap-0 max-w-5xl mx-auto w-full py-6"
+            className="page-stack"
         >
             {/* Hero Section */}
-            <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-accent/10 via-surface to-accent-muted/10 border border-accent/20 p-10 md:p-16 flex flex-col items-center text-center gap-6">
+            <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-accent/10 via-surface to-accent-muted/10 border border-accent/20 p-5 sm:p-10 md:p-16 flex flex-col items-center text-center gap-6">
                 <div className="absolute top-0 right-0 w-60 h-60 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-40 h-40 bg-accent-muted/10 rounded-full blur-[80px] pointer-events-none" />
 
-                <div className="relative z-10 flex flex-col items-center gap-6">
+                <div className="relative z-10 flex flex-col items-center gap-6 min-w-0">
                     <div className="w-20 h-20 bg-accent/15 border border-accent/30 rounded-3xl flex items-center justify-center">
                         <Facebook size={40} className="text-accent" />
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl font-black text-text-primary tracking-tight leading-tight">
+                    <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-text-primary tracking-tight leading-tight break-words">
                         Instant Income: Facebook Posts
                     </h1>
 
@@ -171,33 +172,27 @@ export default function InstantIncomePage() {
                         200+ Ready-to-Post Messages for Facebook Groups
                     </p>
 
-                    <p className="text-text-secondary text-base max-w-2xl leading-relaxed">
+                    <p className="subtitle max-w-2xl text-center">
                         Copy these proven posts, paste them in Facebook groups, and start making money TODAY. No tech skills needed!
                     </p>
                 </div>
             </section>
 
             {/* Video Tutorial Section */}
-            <section className="mt-10 glass-card p-0 overflow-hidden">
+            <section className="glass-card p-0 overflow-hidden">
                 <div className="flex flex-col md:flex-row">
                     <div className="md:w-1/2 relative bg-black/40">
-                        <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-                            <iframe
-                                src="https://player.vimeo.com/video/1171721099?badge=0&autopause=0&player_id=0&app_id=58479"
-                                className="absolute inset-0 w-full h-full"
-                                frameBorder="0"
-                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                                allowFullScreen
-                                title="Instant Access Tutorial"
-                            />
-                        </div>
+                        <VideoEmbed
+                            src="https://player.vimeo.com/video/1171721099?badge=0&autopause=0&player_id=0&app_id=58479"
+                            title="Instant Access Tutorial"
+                        />
                     </div>
-                    <div className="md:w-1/2 p-8 md:p-10 flex flex-col justify-center gap-4">
+                    <div className="md:w-1/2 p-4 sm:p-8 md:p-10 flex flex-col justify-center gap-4 min-w-0">
                         <div className="flex items-center gap-2">
                             <Sparkles size={14} className="text-accent" />
                             <span className="text-[11px] font-bold text-accent uppercase tracking-[0.2em]">Watch First</span>
                         </div>
-                        <h2 className="text-2xl font-bold text-text-primary">How to Use Instant Income</h2>
+                        <h2 className="section-title">How to Use Instant Income</h2>
                         <p className="text-text-secondary leading-relaxed">
                             Watch this quick tutorial to learn how to copy these Facebook posts and start making money instantly. Simple and easy!
                         </p>
@@ -206,10 +201,10 @@ export default function InstantIncomePage() {
             </section>
 
             {/* 3 Steps Section */}
-            <section className="mt-10 glass-card p-8">
-                <div className="flex items-center gap-3 mb-8">
-                    <CheckCircle2 size={22} className="text-accent" />
-                    <h2 className="text-xl font-bold text-text-primary">How to Use This (3 Simple Steps)</h2>
+            <section className="glass-card p-4 sm:p-8">
+                <div className="flex items-center gap-3 mb-8 min-w-0">
+                    <CheckCircle2 size={22} className="text-accent shrink-0" />
+                    <h2 className="section-title min-w-0">How to Use This (3 Simple Steps)</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -245,16 +240,16 @@ export default function InstantIncomePage() {
             </section>
 
             {/* How to Find & Post Guide (Collapsible) */}
-            <section className="mt-10 glass-card overflow-hidden">
+            <section className="glass-card overflow-hidden">
                 <button
                     onClick={() => setShowGuide(!showGuide)}
-                    className="w-full p-8 flex items-center justify-between text-left"
+                    className="w-full p-4 sm:p-8 flex items-center justify-between gap-3 text-left"
                 >
-                    <div className="flex items-center gap-3">
-                        <BookOpen size={22} className="text-accent" />
-                        <h2 className="text-xl font-bold text-text-primary">How to Find & Post in Facebook Groups</h2>
+                    <div className="flex items-center gap-3 min-w-0">
+                        <BookOpen size={22} className="text-accent shrink-0" />
+                        <h2 className="section-title min-w-0">How to Find & Post in Facebook Groups</h2>
                     </div>
-                    {showGuide ? <ChevronUp size={20} className="text-text-muted" /> : <ChevronDown size={20} className="text-text-muted" />}
+                    {showGuide ? <ChevronUp size={20} className="text-text-muted shrink-0" /> : <ChevronDown size={20} className="text-text-muted shrink-0" />}
                 </button>
 
                 <AnimatePresence>
@@ -265,7 +260,7 @@ export default function InstantIncomePage() {
                             exit={{ height: 0, opacity: 0 }}
                             className="overflow-hidden"
                         >
-                            <div className="px-8 pb-8 flex flex-col gap-6">
+                            <div className="px-4 sm:px-8 pb-4 sm:pb-8 flex flex-col gap-6">
                                 {/* Step 1 */}
                                 <div className="bg-surface border border-border-dim rounded-xl p-6 flex flex-col gap-3">
                                     <h3 className="text-base font-bold text-text-primary">Step 1: Find Facebook Groups</h3>
@@ -304,10 +299,10 @@ export default function InstantIncomePage() {
             </section>
 
             {/* How Much Can You Make? */}
-            <section className="mt-10 glass-card p-8">
-                <div className="flex items-center gap-3 mb-6">
-                    <DollarSign size={22} className="text-accent" />
-                    <h2 className="text-xl font-bold text-text-primary">How Much Can You Make?</h2>
+            <section className="glass-card p-4 sm:p-8">
+                <div className="flex items-center gap-3 mb-6 min-w-0">
+                    <DollarSign size={22} className="text-accent shrink-0" />
+                    <h2 className="section-title min-w-0">How Much Can You Make?</h2>
                 </div>
                 <p className="text-text-secondary mb-5 leading-relaxed">
                     Each post can generate $40-$400 per day depending on the niche and how many groups you post in. Here&apos;s the math:
@@ -327,8 +322,8 @@ export default function InstantIncomePage() {
             </section>
 
             {/* ====== GET YOUR POSTS NOW ====== */}
-            <section className="mt-14 flex flex-col gap-8">
-                <h2 className="text-2xl font-black text-text-primary">Get Your Posts Now</h2>
+            <section className="flex flex-col gap-8">
+                <h2 className="section-title">Get Your Posts Now</h2>
 
                 {/* Step 1: Niche Selector */}
                 <div className="flex flex-col gap-4">
@@ -417,13 +412,13 @@ export default function InstantIncomePage() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
-                        className="mt-10 flex flex-col gap-5"
+                        className="flex flex-col gap-5"
                     >
-                        <div className="flex items-center justify-between">
-                            <h2 className="text-xl font-bold text-text-primary">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 min-w-0">
+                            <h2 className="section-title min-w-0 break-words">
                                 {filteredPosts.length} Posts Ready — {selectedNiche}
                             </h2>
-                            <span className="text-[11px] font-bold text-accent bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-full">
+                            <span className="text-[11px] font-bold text-accent bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-full shrink-0 self-start sm:self-auto">
                                 Copy → Paste → Earn
                             </span>
                         </div>

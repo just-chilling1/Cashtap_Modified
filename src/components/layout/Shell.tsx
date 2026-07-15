@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, Target, X } from "lucide-react";
-import { Sidebar } from "./Sidebar";
+import { MobileBottomNav, Sidebar } from "./Sidebar";
 import { SupportBanner } from "../dashboard/SupportBanner";
 import { GlobalPromotionBanner } from "./GlobalPromotionBanner";
 import { SocialProofToast } from "../dopamine/SocialProofToast";
@@ -13,6 +13,7 @@ import { FreeTrainingPopup } from "../dopamine/FreeTrainingPopup";
 export function Shell({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const isAuthPage = pathname === "/login" || pathname === "/signup" || pathname === "/forgot-password" || pathname === "/reset-password" || pathname === "/onboarding" || pathname.startsWith("/onboarding/") || pathname.startsWith("/auth/");
+    const hidePromotionBanner = pathname === "/scale-training";
     const [popupVisible, setPopupVisible] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -25,7 +26,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <div className="flex h-screen overflow-hidden bg-[#080808] w-full max-w-[100vw]">
+        <div className="flex h-screen overflow-hidden bg-[#080808] w-full max-w-full">
             {/* Mobile backdrop */}
             {sidebarOpen && (
                 <div
@@ -48,31 +49,33 @@ export function Shell({ children }: { children: React.ReactNode }) {
                         onClick={() => setSidebarOpen((v) => !v)}
                         aria-label={sidebarOpen ? "Close menu" : "Open menu"}
                         aria-expanded={sidebarOpen}
-                        className="flex items-center justify-center w-10 h-10 -ml-1 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface/50 transition-colors"
+                        className="flex items-center justify-center w-11 h-11 -ml-1 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface/50 transition-colors"
                     >
                         {sidebarOpen ? <X size={22} /> : <Menu size={22} />}
                     </button>
-                    <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 bg-accent flex items-center justify-center rounded-md">
-                            <Target size={16} className="text-black" />
+                    <div className="flex items-center gap-2 min-h-11">
+                        <div className="w-11 h-11 bg-accent flex items-center justify-center rounded-md">
+                            <Target size={18} className="text-black" />
                         </div>
                         <span className="brand-font text-[17px] text-text-primary tracking-tight leading-none">CashTap AI</span>
                     </div>
-                    <div className="w-10" aria-hidden="true" />
+                    <div className="w-11 h-11" aria-hidden="true" />
                 </div>
 
-                <div className="px-4 sm:px-8 lg:px-16 pt-6 lg:pt-10 pb-16 max-w-7xl mx-auto min-h-full flex flex-col w-full min-w-0">
-                    <GlobalPromotionBanner />
+                <div className="px-3 sm:px-8 lg:px-16 pt-6 lg:pt-10 pb-24 md:pb-16 max-w-7xl mx-auto min-h-full flex flex-col w-full min-w-0 overflow-x-hidden">
+                    {!hidePromotionBanner && <GlobalPromotionBanner />}
                     {children}
                     <div className="mt-auto pt-16">
                         <SupportBanner />
                     </div>
                 </div>
             </main>
+
+            <MobileBottomNav onMore={() => setSidebarOpen(true)} />
+
             <WithdrawPopup onVisibilityChange={setPopupVisible} />
             <SocialProofToast paused={popupVisible} />
             <FreeTrainingPopup />
         </div>
     );
 }
-

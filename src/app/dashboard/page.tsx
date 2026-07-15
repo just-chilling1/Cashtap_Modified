@@ -8,6 +8,8 @@ import { MilestoneTracker } from "@/components/dopamine/MilestoneTracker";
 import { EarningsTestimonials } from "@/components/dopamine/EarningsTestimonials";
 import { RollingEarningsCounter } from "@/components/dopamine/RollingEarningsCounter";
 import { TrustBar } from "@/components/dopamine/TrustBar";
+import { VideoEmbed } from "@/components/ui/LazyIframe";
+import { StartHereSection } from "@/components/dashboard/StartHereSection";
 
 interface Stats {
     totalSearches: number;
@@ -77,17 +79,22 @@ export default function DashboardPage() {
         <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col gap-8 max-w-5xl mx-auto w-full"
+            className="page-stack"
         >
             {/* Header */}
             <header className="flex flex-col gap-1">
-                <h1 className="text-4xl text-text-primary font-black tracking-tight">
+                <h1 className="page-title">
                     Home
                 </h1>
                 <p className="subtitle">
                     Follow the steps to find ads and create ready-to-use replies.
                 </p>
             </header>
+
+            {/* Start Here — new users (no searches yet) */}
+            {!loadingStats && (stats?.totalSearches ?? 0) === 0 && (
+                <StartHereSection completedSteps={0} />
+            )}
 
             {/* Rolling Earnings Counter */}
             <RollingEarningsCounter />
@@ -115,16 +122,11 @@ export default function DashboardPage() {
 
             {/* Video Section */}
             <div className="card-base overflow-hidden p-0!">
-                <div className="relative w-full bg-[#0A0A0B]" style={{ paddingBottom: "56.25%" }}>
-                    <iframe
-                        src="https://player.vimeo.com/video/1171466801?badge=0&autopause=0&player_id=0&app_id=58479"
-                        className="absolute inset-0 w-full h-full"
-                        frameBorder="0"
-                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                        allowFullScreen
-                        title="cashtap-intro"
-                    />
-                </div>
+                <VideoEmbed
+                    src="https://player.vimeo.com/video/1171466801?badge=0&autopause=0&player_id=0&app_id=58479"
+                    title="cashtap-intro"
+                    poster="/training/watch-training-dashboard.png"
+                />
                 <div className="p-5 border-t border-border-dim/30">
                     <div className="flex items-center gap-3">
                         <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center">

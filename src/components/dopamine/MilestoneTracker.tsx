@@ -25,12 +25,12 @@ export function MilestoneTracker({ totalSearches }: MilestoneTrackerProps) {
 
     return (
         <div className="card-base border-accent/10 flex flex-col gap-5 p-6">
-            <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center shrink-0">
                         <Trophy size={18} className="text-accent" />
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col min-w-0">
                         <span className="text-sm font-bold text-white">Your Progress</span>
                         <span className="text-[10px] text-text-muted uppercase tracking-widest">
                             {currentMilestone ? currentMilestone.label : "Just Getting Started"}
@@ -38,7 +38,7 @@ export function MilestoneTracker({ totalSearches }: MilestoneTrackerProps) {
                     </div>
                 </div>
                 {currentMilestone && (
-                    <div className="bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                    <div className="bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-full flex items-center gap-1.5 shrink-0">
                         <currentMilestone.icon size={12} className="text-accent" />
                         <span className="text-[10px] font-black text-accent uppercase">{currentMilestone.label}</span>
                     </div>

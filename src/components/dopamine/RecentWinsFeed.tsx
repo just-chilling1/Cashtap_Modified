@@ -39,12 +39,18 @@ function generateWin(): Win {
     };
 }
 
+const SEED_WINS: Win[] = [
+    { name: "Sarah M.", location: "Texas", amount: "$142", niche: "weight loss", time: "3m ago" },
+    { name: "James R.", location: "Florida", amount: "$89", niche: "crypto", time: "7m ago" },
+    { name: "Maria L.", location: "UK", amount: "$215", niche: "skincare", time: "12m ago" },
+    { name: "Derek T.", location: "Canada", amount: "$67", niche: "dog food", time: "18m ago" },
+];
+
 export function RecentWinsFeed() {
-    const [wins, setWins] = useState<Win[]>(() =>
-        Array.from({ length: 4 }, generateWin)
-    );
+    const [wins, setWins] = useState<Win[]>(SEED_WINS);
 
     useEffect(() => {
+        setWins(Array.from({ length: 4 }, generateWin));
         const interval = setInterval(() => {
             setWins(prev => [generateWin(), ...prev.slice(0, 3)]);
         }, 12000);

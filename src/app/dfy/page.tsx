@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { clsx } from "clsx";
 import { InfoHint } from "@/components/ui/InfoHint";
+import { VideoEmbed } from "@/components/ui/LazyIframe";
 
 interface Post {
     id: string;
@@ -161,7 +162,7 @@ export default function DfyPage() {
         <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex flex-col gap-10 py-10 max-w-5xl mx-auto w-full"
+            className="page-stack"
         >
             {/* Header */}
             <header className="flex flex-col items-center text-center gap-5">
@@ -169,10 +170,10 @@ export default function DfyPage() {
                     <Crown size={32} className="text-[#D4AF37] fill-[#D4AF37]/20" />
                 </div>
                 <div className="flex flex-col gap-3">
-                    <h1 className="text-[40px] text-white font-black leading-tight tracking-tight">
+                    <h1 className="text-[28px] sm:text-[40px] text-white font-black leading-tight tracking-tight">
                         Done-For-You <span className="text-accent">Vault</span>
                     </h1>
-                    <p className="text-[18px] font-bold text-accent/80 tracking-wide uppercase">
+                    <p className="text-[14px] sm:text-[18px] font-bold text-accent/80 tracking-wide uppercase break-words px-1">
                         50 Proven Search Angles & Keywords Ready to Hunt & Earn
                     </p>
                 </div>
@@ -182,23 +183,17 @@ export default function DfyPage() {
             <section className="glass-card p-0 overflow-hidden">
                 <div className="flex flex-col md:flex-row">
                     <div className="md:w-1/2 relative bg-black/40">
-                        <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-                            <iframe
-                                src="https://player.vimeo.com/video/1171728175?badge=0&autopause=0&player_id=0&app_id=58479"
-                                className="absolute inset-0 w-full h-full"
-                                frameBorder="0"
-                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                                allowFullScreen
-                                title="Done-For-You Tutorial"
-                            />
-                        </div>
+                        <VideoEmbed
+                            src="https://player.vimeo.com/video/1171728175?badge=0&autopause=0&player_id=0&app_id=58479"
+                            title="Done-For-You Tutorial"
+                        />
                     </div>
-                    <div className="md:w-1/2 p-8 md:p-10 flex flex-col justify-center gap-4">
+                    <div className="md:w-1/2 p-4 sm:p-8 md:p-10 flex flex-col justify-center gap-4 min-w-0">
                         <div className="flex items-center gap-2">
                             <Sparkles size={14} className="text-accent" />
                             <span className="text-[11px] font-bold text-accent uppercase tracking-[0.2em]">Watch First</span>
                         </div>
-                        <h2 className="text-2xl font-bold text-white">How to Use Done-For-You</h2>
+                        <h2 className="section-title">How to Use Done-For-You</h2>
                         <p className="text-text-secondary leading-relaxed">
                             Watch this quick tutorial to learn how to pick a keyword, add your link, and get ready-made replies you can post in minutes.
                         </p>
@@ -207,29 +202,30 @@ export default function DfyPage() {
             </section>
 
             {/* Progress Steps */}
-            <div className="flex items-center justify-center gap-3">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
                 {[
                     { num: 1, label: "Pick Keyword" },
                     { num: 2, label: "Your Link" },
                     { num: 3, label: "Get Replies" }
                 ].map((s, i) => (
-                    <div key={s.num} className="flex items-center gap-3">
+                    <div key={s.num} className="flex items-center gap-2 sm:gap-3">
                         <div className={clsx(
-                            "flex items-center gap-2.5 px-4 py-2 rounded-full border transition-all",
+                            "flex items-center gap-1.5 sm:gap-2.5 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full border transition-all",
                             step >= s.num
                                 ? "bg-accent/10 border-accent/30 text-accent"
                                 : "bg-surface border-border-dim text-text-muted"
                         )}>
                             <span className={clsx(
-                                "w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-black",
+                                "w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[10px] sm:text-[11px] font-black shrink-0",
                                 step >= s.num ? "bg-accent text-black" : "bg-white/5 text-text-muted"
                             )}>
                                 {step > s.num ? <Check size={12} /> : s.num}
                             </span>
-                            <span className="text-[12px] font-bold uppercase tracking-wider">{s.label}</span>
+                            <span className="text-[10px] sm:text-[12px] font-bold uppercase tracking-wider">{s.label}</span>
                         </div>
                         {i < 2 && (
                             <ChevronRight size={14} className={clsx(
+                                "hidden sm:block",
                                 step > s.num ? "text-accent" : "text-text-muted/30"
                             )} />
                         )}
@@ -247,9 +243,9 @@ export default function DfyPage() {
                         exit={{ opacity: 0, y: -20 }}
                         className="flex flex-col gap-6"
                     >
-                        <div className="flex items-center gap-3 px-1">
-                            <Zap size={18} className="text-accent" />
-                            <h2 className="text-xl font-bold text-white inline-flex items-center gap-2">
+                        <div className="flex items-center gap-3 px-1 min-w-0">
+                            <Zap size={18} className="text-accent shrink-0" />
+                            <h2 className="text-xl font-bold text-white flex flex-wrap items-center gap-2 min-w-0">
                                 Choose Your Keyword
                                 <InfoHint
                                     label="What is a niche?"
@@ -307,32 +303,32 @@ export default function DfyPage() {
                         exit={{ opacity: 0, y: -20 }}
                         className="flex flex-col gap-6 max-w-2xl mx-auto w-full"
                     >
-                        <div className="glass-card p-5 flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center">
+                        <div className="glass-card p-5 flex items-center justify-between gap-3 min-w-0">
+                            <div className="flex items-center gap-3 min-w-0">
+                                <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
                                     <Check size={16} className="text-accent" />
                                 </div>
-                                <div>
+                                <div className="min-w-0">
                                     <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Selected Keyword</p>
-                                    <p className="text-[15px] font-bold text-white">&ldquo;{selectedKeyword.label}&rdquo;</p>
+                                    <p className="text-[15px] font-bold text-white truncate">&ldquo;{selectedKeyword.label}&rdquo;</p>
                                 </div>
                             </div>
                             <button
                                 onClick={() => setStep(1)}
-                                className="text-[11px] font-bold text-text-muted hover:text-accent transition-colors flex items-center gap-1.5"
+                                className="text-[11px] font-bold text-text-muted hover:text-accent transition-colors flex items-center gap-1.5 shrink-0"
                             >
                                 <RotateCcw size={12} />
                                 Change
                             </button>
                         </div>
 
-                        <div className="glass-card p-8 flex flex-col gap-6">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                        <div className="glass-card p-4 sm:p-8 flex flex-col gap-6">
+                            <div className="flex items-center gap-3 min-w-0">
+                                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
                                     <LinkIcon size={18} className="text-accent" />
                                 </div>
-                                <div>
-                                    <h2 className="text-xl font-bold text-white inline-flex items-center gap-2">
+                                <div className="min-w-0">
+                                    <h2 className="text-xl font-bold text-white flex flex-wrap items-center gap-2">
                                         Provide Your Digistore Affiliate Link
                                         <InfoHint
                                             label="What is a Digistore affiliate link?"
@@ -382,17 +378,17 @@ export default function DfyPage() {
                         className="flex flex-col gap-6"
                     >
                         {/* Recap bar */}
-                        <div className="glass-card p-4 flex flex-wrap items-center justify-between gap-3">
-                            <div className="flex items-center gap-4">
-                                <div className="flex items-center gap-2 px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-lg">
+                        <div className="glass-card p-4 flex flex-wrap items-center justify-between gap-3 min-w-0">
+                            <div className="flex items-center gap-4 min-w-0">
+                                <div className="flex items-center gap-2 px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-lg shrink-0">
                                     <Flame size={12} className="text-accent" />
                                     <span className="text-[11px] font-bold text-accent">{selectedKeyword?.niche}</span>
                                 </div>
-                                <span className="text-[13px] font-medium text-text-primary">&ldquo;{selectedKeyword?.label}&rdquo;</span>
+                                <span className="text-[13px] font-medium text-text-primary truncate min-w-0">&ldquo;{selectedKeyword?.label}&rdquo;</span>
                             </div>
                             <button
                                 onClick={handleReset}
-                                className="flex items-center gap-1.5 text-[11px] font-bold text-text-muted hover:text-accent transition-colors"
+                                className="flex items-center gap-1.5 text-[11px] font-bold text-text-muted hover:text-accent transition-colors shrink-0"
                             >
                                 <RotateCcw size={12} />
                                 Start Over

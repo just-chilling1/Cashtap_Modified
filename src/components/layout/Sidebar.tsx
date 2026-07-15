@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { LayoutGrid, Radar, LogOut, ChevronRight, GraduationCap, Target, Sparkles, Rocket, Scan, Search, MessageSquare, Brain, TrendingUp, ExternalLink, Menu } from "lucide-react";
+import { LayoutGrid, Radar, LogOut, ChevronRight, GraduationCap, Target, Sparkles, Rocket, Scan, Search, MessageSquare, Brain, TrendingUp, ExternalLink, Wand2 } from "lucide-react";
 import { useSearch } from "@/context/SearchContext";
 import { clsx } from "clsx";
 import { motion } from "framer-motion";
@@ -26,12 +26,13 @@ const UPGRADES = [
 
 const MOBILE_TABS = [
     { path: "/dashboard", label: "Home", icon: LayoutGrid },
-    { path: "/search", label: "Search", icon: Search },
+    { path: "/search", label: "Generate", icon: Wand2 },
+    { path: "/analysis", label: "Analysis", icon: Brain },
     { path: "/radar", label: "Ads", icon: Radar },
-    { path: "/replies", label: "Replies", icon: MessageSquare },
+    { path: "/replies", label: "Create Replies", icon: MessageSquare },
 ];
 
-export function MobileBottomNav({ onMore }: { onMore: () => void }) {
+export function MobileBottomNav() {
     const pathname = usePathname();
 
     return (
@@ -55,19 +56,10 @@ export function MobileBottomNav({ onMore }: { onMore: () => void }) {
                             )}
                         >
                             <Icon size={20} strokeWidth={isActive ? 2.25 : 1.75} />
-                            <span className="text-[10px] font-semibold tracking-wide leading-none">{tab.label}</span>
+                            <span className="text-[10px] font-semibold tracking-wide leading-none text-center">{tab.label}</span>
                         </Link>
                     );
                 })}
-                <button
-                    type="button"
-                    onClick={onMore}
-                    aria-label="Open menu"
-                    className="flex flex-1 flex-col items-center justify-center gap-0.5 min-w-11 min-h-11 px-1 rounded-lg text-text-muted hover:text-text-primary transition-colors"
-                >
-                    <Menu size={20} strokeWidth={1.75} />
-                    <span className="text-[10px] font-semibold tracking-wide leading-none">More</span>
-                </button>
             </div>
         </nav>
     );

@@ -167,22 +167,9 @@ export default function RadarPage() {
                     </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-                    <div className="flex flex-col items-start sm:items-end px-3 sm:border-r border-border-dim/30">
-                        <span className="text-[9px] font-bold text-text-muted uppercase tracking-widest">Selected</span>
-                        <span className="text-lg font-black text-accent tabular-nums">{selectedAds.length}</span>
-                    </div>
-                    <button
-                        onClick={() => router.push("/replies")}
-                        disabled={selectedAds.length === 0}
-                        className={clsx(
-                            "btn-primary h-11 px-5 text-sm rounded-lg group w-full sm:w-auto",
-                            selectedAds.length === 0 && "opacity-40 grayscale pointer-events-none"
-                        )}
-                    >
-                        <span>Step 4: Create Replies</span>
-                        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                    </button>
+                <div className="flex flex-col items-start sm:items-end px-3">
+                    <span className="text-[9px] font-bold text-text-muted uppercase tracking-widest">Selected</span>
+                    <span className="text-lg font-black text-accent tabular-nums">{selectedAds.length}</span>
                 </div>
             </header>
 
@@ -247,19 +234,25 @@ export default function RadarPage() {
             </div>
 
             {/* Footer nav */}
-            <div className="flex items-center justify-between pt-4 border-t border-border-dim/20">
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-border-dim/20">
                 <button
                     onClick={() => router.push("/analysis")}
-                    className="flex items-center gap-2 text-[11px] font-bold text-text-muted hover:text-accent transition-colors"
+                    className="flex items-center gap-2 text-[11px] font-bold text-text-muted hover:text-accent transition-colors self-start sm:self-auto"
                 >
                     <ArrowLeft size={14} />
                     <span>Back to Step 2</span>
                 </button>
-                {selectedAds.length > 0 && (
-                    <p className="text-[11px] text-text-muted">
-                        <strong className="text-accent">{selectedAds.length}</strong> ad{selectedAds.length !== 1 ? "s" : ""} ready for replies
-                    </p>
-                )}
+                <button
+                    onClick={() => router.push("/replies")}
+                    disabled={selectedAds.length === 0}
+                    className={clsx(
+                        "btn-primary h-11 px-5 text-sm rounded-lg group w-full sm:w-auto",
+                        selectedAds.length === 0 && "opacity-40 grayscale pointer-events-none"
+                    )}
+                >
+                    <span>Step 4: Create Replies</span>
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </button>
             </div>
         </motion.div>
     );

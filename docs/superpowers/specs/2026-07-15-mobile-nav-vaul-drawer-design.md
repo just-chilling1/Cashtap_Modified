@@ -60,6 +60,7 @@ Thin Vaul wrapper:
 ### `Shell` changes
 
 - Wire hamburger and `MobileBottomNav` `onMore` to drawer open state
+- **Mobile top bar:** move the hamburger (menu / close) button to the **right**; keep brand on the left (or centered with a left spacer balancing the right control). Do not leave the menu control on the left.
 - Remove custom backdrop
 - Mount `MobileNavDrawer` for mobile; mount static `Sidebar` in the existing `lg:w-72` spacer for desktop
 - Keep route-change close effect
@@ -72,7 +73,7 @@ Unchanged API (`onMore`); still opens the same `sidebarOpen` state.
 
 | Action | Result |
 |--------|--------|
-| Hamburger (top bar) | Toggle drawer |
+| Hamburger (top bar, **right side**) | Toggle drawer |
 | Bottom **More** | Open drawer |
 | Overlay click | Close |
 | Escape | Close |
@@ -93,11 +94,11 @@ Unchanged API (`onMore`); still opens the same `sidebarOpen` state.
 | `package.json` / lockfile | Add `vaul` |
 | `src/components/layout/Sidebar.tsx` | Extract `SidebarNav`; desktop-only `Sidebar`; keep `MobileBottomNav` |
 | `src/components/layout/MobileNavDrawer.tsx` | New Vaul drawer wrapper |
-| `src/components/layout/Shell.tsx` | Use drawer on mobile; drop custom backdrop; keep desktop rail |
+| `src/components/layout/Shell.tsx` | Use drawer on mobile; drop custom backdrop; keep desktop rail; hamburger on the right in the mobile top bar |
 
 ## Verification
 
-1. **Mobile (below lg):** Open via hamburger and More; close via overlay, swipe, Escape, and after navigation; background does not scroll.
+1. **Mobile (below lg):** Hamburger is on the **right** of the top bar; open via hamburger and More; close via overlay, swipe, Escape, and after navigation; background does not scroll.
 2. **Desktop (lg+):** Static sidebar always visible; no drawer overlay/chrome.
 3. **Auth routes:** Still no shell chrome.
 4. **Visual:** Nav content, width (`w-72` / `max-w-[85vw]`), and colors match pre-change sidebar.

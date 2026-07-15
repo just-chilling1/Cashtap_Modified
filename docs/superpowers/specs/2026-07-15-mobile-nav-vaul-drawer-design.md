@@ -105,4 +105,4 @@ Unchanged API (`onMore`); still opens the same `sidebarOpen` state.
 ## Risks / notes
 
 - Vaul is bottom-sheet–oriented; left `direction` is supported but should be smoke-tested on iOS Safari (safe area, swipe).
-- Avoid double-mounting heavy sidebar content if both desktop and mobile trees render in the same viewport — use responsive mounting (`lg:hidden` / `hidden lg:…`) so only one surface is active.
+- Avoid double-mounting heavy sidebar content if both desktop and mobile trees render in the same viewport — use responsive mounting (`lg:hidden` / `hidden lg:block`) so only one surface is active.

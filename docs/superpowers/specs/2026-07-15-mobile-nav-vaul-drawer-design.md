@@ -63,7 +63,7 @@ Thin Vaul wrapper:
 - Remove custom backdrop
 - Mount `MobileNavDrawer` for mobile; mount static `Sidebar` in the existing `lg:w-72` spacer for desktop
 - Keep route-change close effect
-- **Mobile top bar:** place the hamburger/menu toggle on the **right** (brand on the left). Swap today’s left-button / center-brand / right-spacer layout accordingly.
+- **Mobile top bar layout:** brand (logo + “CashTap AI”) on the **left**; hamburger / close on the **right** (swap from current left-hamburger layout). Keep a matching-width spacer on the left only if needed for visual balance; prefer `justify-between` with brand left and menu right.
 
 ### `MobileBottomNav`
 
@@ -73,7 +73,7 @@ Unchanged API (`onMore`); still opens the same `sidebarOpen` state.
 
 | Action | Result |
 |--------|--------|
-| Hamburger (top bar, **right** side) | Toggle drawer |
+| Hamburger (top bar, right side) | Toggle drawer |
 | Bottom **More** | Open drawer |
 | Overlay click | Close |
 | Escape | Close |
@@ -98,10 +98,11 @@ Unchanged API (`onMore`); still opens the same `sidebarOpen` state.
 
 ## Verification
 
-1. **Mobile (below lg):** Hamburger is on the **right** of the top bar; open via hamburger and More; close via overlay, swipe, Escape, and after navigation; background does not scroll.
+1. **Mobile (below lg):** Open via hamburger and More; close via overlay, swipe, Escape, and after navigation; background does not scroll.
 2. **Desktop (lg+):** Static sidebar always visible; no drawer overlay/chrome.
 3. **Auth routes:** Still no shell chrome.
 4. **Visual:** Nav content, width (`w-72` / `max-w-[85vw]`), and colors match pre-change sidebar.
+5. **Mobile top bar:** Brand left, hamburger right.
 
 ## Risks / notes
 

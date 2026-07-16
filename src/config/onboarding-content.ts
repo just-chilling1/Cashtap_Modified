@@ -29,7 +29,8 @@ export const onboardingContent = {
     congratulations: {
         badge: "🎉 CONGRATULATIONS!",
         headline: "You've Been Randomly Selected",
-        continueCta: "Continue",
+        teaser: `Your ${ONBOARDING_PRODUCT_NAME} account has been flagged for an exclusive opportunity. Tap continue to see what's waiting for you.`,
+        continueCta: "Continue >",
     },
     beta: {
         headline:

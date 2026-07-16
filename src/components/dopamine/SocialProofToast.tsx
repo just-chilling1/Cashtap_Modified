@@ -67,10 +67,10 @@ export function SocialProofToast({ paused = false }: { paused?: boolean }) {
         <AnimatePresence>
             {visible && current && (
                 <motion.div
-                    initial={{ opacity: 0, y: 50, x: 0 }}
+                    initial={{ opacity: 0, y: 50, x: 20 }}
                     animate={{ opacity: 1, y: 0, x: 0 }}
-                    exit={{ opacity: 0, y: 20 }}
-                    className="fixed bottom-20 left-4 right-4 z-50 max-w-sm md:bottom-6 md:left-6 md:right-auto"
+                    exit={{ opacity: 0, y: 20, x: 20 }}
+                    className="fixed bottom-20 left-4 right-4 z-50 max-w-sm md:bottom-6 md:right-6 md:left-auto"
                 >
                     <div className="bg-[#111113] border border-white/10 rounded-2xl p-4 flex items-center gap-3 shadow-[0_20px_50px_rgba(0,0,0,0.8)] min-w-0">
                         <div className={`w-10 h-10 rounded-xl ${current.bg} flex items-center justify-center shrink-0`}>

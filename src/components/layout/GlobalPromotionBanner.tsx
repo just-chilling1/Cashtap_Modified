@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Smartphone, X } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import { ArrowRight, Play, X } from "lucide-react";
+import { motion } from "framer-motion";
+
+const CTA_URL = "https://www.breakoutai.net/5k-passive-9";
 
 export function GlobalPromotionBanner() {
     const [isDismissed, setIsDismissed] = useState(false);
@@ -15,53 +17,59 @@ export function GlobalPromotionBanner() {
         <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="w-full min-w-0 pt-4 pb-4 -mt-4 group mb-6"
+            className="w-full min-w-0 pt-4 pb-4 -mt-4 mb-6"
         >
-            <div className="relative overflow-hidden rounded-xl bg-[#0cbda0] p-4 sm:p-6 lg:p-7 shadow-lg">
+            <div className="relative overflow-hidden rounded-xl bg-[#0A0A0B] border border-accent/25 p-4 sm:p-5 shadow-[0_4px_24px_rgba(0,0,0,0.35)]">
+                <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-y-0 left-0 w-1 bg-accent shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                />
+                <div
+                    aria-hidden
+                    className="pointer-events-none absolute -right-16 -top-20 h-40 w-40 rounded-full bg-accent/10 blur-3xl"
+                />
+
                 <button
                     type="button"
                     onClick={() => setIsDismissed(true)}
                     aria-label="Close promotion"
-                    className="absolute top-3 right-3 z-20 rounded-md p-1 text-white/80 transition-colors hover:bg-white/15 hover:text-white"
+                    className="absolute top-2.5 right-2.5 z-20 flex h-9 w-9 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-white/5 hover:text-white"
                 >
                     <X size={18} strokeWidth={2} />
                 </button>
 
-                <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 relative z-10 w-full min-w-0">
-                    {/* Icon section */}
-                    <div className="hidden md:flex relative shrink-0">
-                        <Smartphone size={56} className="text-white" strokeWidth={1.5} />
-                        <div className="absolute -right-2 top-2 bg-[#0cbda0] rounded-full p-0.5">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="#FFBA00" stroke="#FFBA00" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="12" cy="12" r="10" />
-                                <path d="M12 8v8" stroke="black" fill="none"></path>
-                                <path d="M14.5 9.5a2.5 2.5 0 0 0-5 0c0 4 5 1 5 5a2.5 2.5 0 0 1-5 0" stroke="black" fill="none"></path>
-                            </svg>
+                <div className="relative z-10 flex flex-col gap-4 md:flex-row md:items-center md:gap-5 lg:gap-6 pr-8">
+                    <div className="hidden md:flex shrink-0">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-accent/30 bg-accent/10">
+                            <Play size={22} className="text-accent fill-accent/20 ml-0.5" strokeWidth={2} />
                         </div>
                     </div>
 
-                    {/* Text content */}
-                    <div className="flex flex-col gap-3 flex-1 min-w-0 pr-6">
-                        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight break-words">
-                            Want To Multiply Your Earnings To $1,000 - $5,000 A Day?
+                    <div className="flex min-w-0 flex-1 flex-col gap-2">
+                        <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-accent">
+                            Free member training
+                        </span>
+                        <h2 className="brand-font text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight break-words leading-snug">
+                            Scale to $1K–$5K/day with full workflow automation
                         </h2>
-                        <div className="text-white/95 text-[15px] space-y-1.5 leading-relaxed font-medium">
-                            <p>
-                                CashTap AI is powerful, but if you want to scale to truly life-changing income, you need to watch this training which shows how to automate your entire workflow. And guess what?
-                            </p>
-                            <p>
-                                This training is free for all CashTap AI members. So, if you want to unlock your full potential, just tap the yellow button below.
-                            </p>
-                        </div>
+                        <p className="max-w-xl text-sm sm:text-[15px] leading-relaxed text-text-muted">
+                            Watch the free member training that shows how to automate CashTap end to end.
+                        </p>
+                    </div>
 
-                        <div className="mt-2">
-                            <button
-                                onClick={() => window.open("https://www.breakoutai.net/5k-passive-9", "_blank")}
-                                className="bg-[#FFBA00] hover:bg-[#e6a800] transition-colors text-black font-bold w-full sm:w-auto px-6 py-2.5 rounded-md shadow-sm text-sm sm:text-[15px]"
-                            >
-                                Click Here To Learn How
-                            </button>
-                        </div>
+                    <div className="shrink-0 md:pl-2">
+                        <a
+                            href={CTA_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex w-full sm:w-auto md:w-auto items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm sm:text-[15px] font-bold text-black shadow-gold transition-all hover:bg-yellow-500 hover:shadow-[0_0_28px_rgba(212,175,55,0.28)] active:scale-[0.98]"
+                        >
+                            <span className="brand-font tracking-wide">Watch free training</span>
+                            <ArrowRight
+                                size={16}
+                                className="transition-transform group-hover:translate-x-0.5"
+                            />
+                        </a>
                     </div>
                 </div>
             </div>

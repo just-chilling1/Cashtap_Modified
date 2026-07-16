@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Mail, Lock, LogIn, ShieldAlert, Eye, EyeOff, Target, Star, Users, DollarSign, ShieldCheck } from "lucide-react";
+import { AuthAnimatedBackground } from "@/components/auth/AuthAnimatedBackground";
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
@@ -55,30 +56,26 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#050505] flex items-center justify-center p-4 sm:p-6 relative overflow-x-hidden overflow-hidden">
-            {/* Background Accents */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#D4AF37]/5 rounded-full blur-[120px]" />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#D4AF37]/5 rounded-full blur-[120px]" />
-            </div>
+        <div className="min-h-screen bg-[#050505] flex items-center justify-center p-3 sm:p-4 relative overflow-x-hidden overflow-hidden">
+            <AuthAnimatedBackground />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="w-full max-w-md relative z-10 min-w-0"
             >
-                <div className="glass-card p-5 sm:p-10 flex flex-col gap-6 sm:gap-8 border-[#141414] shadow-2xl">
-                    <div className="flex flex-col items-center gap-4 text-center">
-                        <div className="w-16 h-16 bg-accent flex items-center justify-center rounded-xl shadow-gold">
-                            <Target size={32} className="text-black" />
+                <div className="glass-card p-4 sm:p-7 flex flex-col gap-4 sm:gap-5 border-[#141414] shadow-2xl">
+                    <div className="flex flex-col items-center gap-2.5 text-center">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 bg-accent flex items-center justify-center rounded-xl shadow-gold">
+                            <Target size={28} className="text-black" />
                         </div>
                         <div className="flex flex-col">
-                            <h1 className="brand-font text-[26px] sm:text-[32px] text-text-primary leading-tight">CashTap AI</h1>
-                            <p className="text-sm text-text-secondary">Premium Earning Accelerator</p>
+                            <h1 className="brand-font text-[24px] sm:text-[28px] text-text-primary leading-tight">CashTap AI</h1>
+                            <p className="text-xs sm:text-sm text-text-secondary">Premium Earning Accelerator</p>
                         </div>
                     </div>
 
-                    <form onSubmit={handleLogin} className="flex flex-col gap-5">
+                    <form onSubmit={handleLogin} className="flex flex-col gap-3.5 sm:gap-4">
                         {error && (
                             <motion.div
                                 initial={{ opacity: 0, x: -10 }}
@@ -100,7 +97,7 @@ export default function LoginPage() {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="you@email.com"
-                                    className="input-base w-full pl-12"
+                                    className="input-base w-full pl-12 py-2.5"
                                 />
                             </div>
                         </div>
@@ -115,7 +112,7 @@ export default function LoginPage() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     placeholder="••••••••••••"
-                                    className="input-base w-full pl-12 pr-12"
+                                    className="input-base w-full pl-12 pr-12 py-2.5"
                                 />
                                 <button
                                     type="button"
@@ -139,7 +136,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="btn-primary w-full mt-2 group relative overflow-hidden"
+                            className="btn-primary w-full mt-1 py-2.5 group relative overflow-hidden"
                         >
                             <span className="relative z-10 flex items-center justify-center gap-2">
                                 {loading ? "Logging in..." : (
@@ -152,7 +149,7 @@ export default function LoginPage() {
                         </button>
                     </form>
 
-                    <div className="flex flex-col items-center gap-4 border-t border-[#141414] pt-8">
+                    <div className="flex flex-col items-center gap-2.5 border-t border-[#141414] pt-4">
                         <p className="text-[#475569] text-xs">New here?</p>
                         <Link
                             href="/signup"
@@ -163,7 +160,7 @@ export default function LoginPage() {
                     </div>
 
                     {/* Social Proof on Login */}
-                    <div className="flex flex-col gap-3 border-t border-[#141414] pt-6 mt-2">
+                    <div className="flex flex-col gap-2.5 border-t border-[#141414] pt-4">
                         <div className="flex items-center gap-2 justify-center">
                             <div className="flex -space-x-2">
                                 {["bg-pink-500", "bg-blue-500", "bg-purple-500", "bg-green-500", "bg-orange-500"].map((c, i) => (
@@ -189,7 +186,7 @@ export default function LoginPage() {
                     </div>
                 </div>
 
-                <div className="mt-6 flex flex-col items-center gap-3">
+                <div className="mt-3 flex flex-col items-center gap-2">
                     <div className="flex items-center gap-4 text-[10px] text-text-muted">
                         <div className="flex items-center gap-1">
                             <ShieldCheck size={10} className="text-green-400" />

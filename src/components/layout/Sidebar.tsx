@@ -26,10 +26,8 @@ const UPGRADES = [
 
 const MOBILE_TABS = [
     { path: "/dashboard", label: "Home", icon: LayoutGrid },
+    { path: "/training", label: "Training", icon: GraduationCap },
     { path: "/search", label: "Generate", icon: Wand2 },
-    { path: "/analysis", label: "Analysis", icon: Brain },
-    { path: "/radar", label: "Ads", icon: Radar },
-    { path: "/replies", label: "Create Replies", icon: MessageSquare },
 ];
 
 export function MobileBottomNav() {

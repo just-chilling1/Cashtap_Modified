@@ -8,7 +8,7 @@ import {
     CheckCircle2, Target, Copy, ExternalLink, DollarSign, Zap,
     BookOpen, Star, Clock, MonitorPlay
 } from "lucide-react";
-import { VideoEmbed } from "@/components/ui/LazyIframe";
+import { VideoModal } from "@/components/ui/VideoModal";
 import { clsx } from "clsx";
 
 const WATCHED_STORAGE_KEY = "cashtap_training_watched";
@@ -377,6 +377,9 @@ function TrainingVideoCard({
     onToggleWatched: (id: string) => void;
     delay?: number;
 }) {
+    const [modalOpen, setModalOpen] = useState(false);
+    const src = `https://player.vimeo.com/video/${id}?autopause=0&player_id=0&app_id=58479`;
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -387,12 +390,34 @@ function TrainingVideoCard({
             <div className="flex flex-col lg:flex-row gap-5 lg:gap-8 min-w-0">
                 <div className="w-full lg:w-[58%] flex flex-col gap-3 min-w-0">
                     <div className="rounded-lg overflow-hidden border border-border-dim/20">
-                        <VideoEmbed
-                            src={`https://player.vimeo.com/video/${id}?autopause=0&player_id=0&app_id=58479`}
-                            title={title}
-                            wrapperClassName="bg-black"
-                            poster={thumbnail}
-                        />
+                        <div
+                            className="relative w-full bg-black"
+                            style={{ paddingBottom: "56.25%" }}
+                        >
+                            <button
+                                type="button"
+                                onClick={() => setModalOpen(true)}
+                                className="absolute inset-0 w-full h-full group cursor-pointer"
+                                aria-label={`Play ${title}`}
+                            >
+                                {thumbnail ? (
+                                    // eslint-disable-next-line @next/next/no-img-element
+                                    <img
+                                        src={thumbnail}
+                                        alt=""
+                                        className="absolute inset-0 w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <div className="absolute inset-0 bg-[#0A0A0B]" />
+                                )}
+                                <div className="absolute inset-0 bg-black/25 group-hover:bg-black/35 transition-colors" />
+                                <span className="absolute inset-0 flex items-center justify-center">
+                                    <span className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-accent text-text-on-accent flex items-center justify-center shadow-gold group-hover:scale-105 transition-transform">
+                                        <Play size={28} className="fill-current ml-1" />
+                                    </span>
+                                </span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -421,6 +446,13 @@ function TrainingVideoCard({
                     </button>
                 </div>
             </div>
+
+            <VideoModal
+                open={modalOpen}
+                onClose={() => setModalOpen(false)}
+                src={src}
+                title={title}
+            />
         </motion.div>
     );
 }

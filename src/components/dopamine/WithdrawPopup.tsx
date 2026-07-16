@@ -35,7 +35,7 @@ export function WithdrawPopup({ onVisibilityChange }: { onVisibilityChange?: (vi
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 40, scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                    className="fixed bottom-20 left-4 right-4 z-[60] w-auto max-w-sm md:bottom-6 md:left-6 md:right-auto md:w-[380px]"
+                    className="fixed bottom-20 left-4 right-4 z-[60] w-auto max-w-sm md:bottom-6 md:right-6 md:left-auto md:w-[380px]"
                 >
                     <div className="relative overflow-hidden rounded-2xl border border-green-500/30 bg-[#0c0e0c] shadow-[0_25px_70px_rgba(0,0,0,0.9),0_0_40px_rgba(34,197,94,0.15)]">
                         {/* Glow effect */}

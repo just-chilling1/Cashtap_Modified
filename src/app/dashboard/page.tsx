@@ -10,7 +10,6 @@ import { RollingEarningsCounter } from "@/components/dopamine/RollingEarningsCou
 import { TrustBar } from "@/components/dopamine/TrustBar";
 import { VideoEmbed } from "@/components/ui/LazyIframe";
 import { StartHereSection } from "@/components/dashboard/StartHereSection";
-import { useSearch } from "@/context/SearchContext";
 
 interface Stats {
     totalSearches: number;
@@ -61,15 +60,6 @@ export default function DashboardPage() {
     const [loadingStats, setLoadingStats] = useState(true);
     const [greeting, setGreeting] = useState("Welcome back");
     const router = useRouter();
-    const { keyword, analysisByVariation, postsByVariation, selectedAds, repliesByPostId } = useSearch();
-
-    const stepDone = [
-        keyword.trim().length > 0,
-        Object.keys(analysisByVariation).length > 0,
-        selectedAds.length > 0 || Object.values(postsByVariation).some((posts) => posts.length > 0),
-        Object.keys(repliesByPostId).length > 0,
-    ];
-    const completedSteps = stepDone.findIndex((done) => !done) === -1 ? 4 : stepDone.findIndex((done) => !done);
 
     useEffect(() => {
         setGreeting(getGreeting());
@@ -139,15 +129,11 @@ export default function DashboardPage() {
                     {greeting}
                 </h1>
                 <p className="subtitle">
-                    {completedSteps === 0
-                        ? "Follow the 4 steps below to get your first ready-to-use replies."
-                        : completedSteps >= 4
-                          ? "Nice work — your replies are ready. Start a new topic anytime."
-                          : `You're on step ${completedSteps + 1} of 4. Pick up where you left off.`}
+                    Follow the 4 steps below to get your first ready-to-use replies.
                 </p>
             </header>
 
-            <StartHereSection completedSteps={completedSteps} />
+            <StartHereSection />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                 <RollingEarningsCounter />

@@ -28,14 +28,14 @@ export function AuthAnimatedBackground() {
                 className="absolute inset-0"
                 style={{
                     background:
-                        "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(212, 175, 55, 0.06) 0%, transparent 65%), radial-gradient(ellipse 50% 40% at 80% 90%, rgba(212, 175, 55, 0.04) 0%, transparent 55%)",
+                        "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(20, 184, 166, 0.06) 0%, transparent 65%), radial-gradient(ellipse 50% 40% at 80% 90%, rgba(20, 184, 166, 0.04) 0%, transparent 55%)",
                 }}
             />
 
             {/* Slow-moving gold orbs */}
             <motion.div
                 className="absolute -top-[18%] -left-[12%] w-[55%] h-[55%] rounded-full blur-[110px]"
-                style={{ background: "rgba(212, 175, 55, 0.12)" }}
+                style={{ background: "rgba(20, 184, 166, 0.12)" }}
                 animate={
                     reduceMotion
                         ? undefined
@@ -49,7 +49,7 @@ export function AuthAnimatedBackground() {
             />
             <motion.div
                 className="absolute -bottom-[20%] -right-[14%] w-[50%] h-[50%] rounded-full blur-[110px]"
-                style={{ background: "rgba(212, 175, 55, 0.1)" }}
+                style={{ background: "rgba(20, 184, 166, 0.1)" }}
                 animate={
                     reduceMotion
                         ? undefined
@@ -63,7 +63,7 @@ export function AuthAnimatedBackground() {
             />
             <motion.div
                 className="absolute top-[35%] left-[40%] w-[35%] h-[35%] rounded-full blur-[100px]"
-                style={{ background: "rgba(234, 179, 8, 0.06)" }}
+                style={{ background: "rgba(20, 184, 166, 0.06)" }}
                 animate={
                     reduceMotion
                         ? undefined
@@ -81,7 +81,7 @@ export function AuthAnimatedBackground() {
                 className="absolute inset-[-20%] opacity-[0.035]"
                 style={{
                     backgroundImage:
-                        "linear-gradient(rgba(212,175,55,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.9) 1px, transparent 1px)",
+                        "linear-gradient(rgba(20,184,166,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(20,184,166,0.9) 1px, transparent 1px)",
                     backgroundSize: "56px 56px",
                     maskImage:
                         "radial-gradient(ellipse 70% 60% at 50% 45%, black 20%, transparent 75%)",
@@ -101,13 +101,13 @@ export function AuthAnimatedBackground() {
                 PARTICLES.map((p, i) => (
                     <motion.span
                         key={i}
-                        className="absolute rounded-full bg-[#D4AF37]"
+                        className="absolute rounded-full bg-[#14B8A6]"
                         style={{
                             left: p.left,
                             top: p.top,
                             width: p.size,
                             height: p.size,
-                            boxShadow: "0 0 8px rgba(212, 175, 55, 0.45)",
+                            boxShadow: "0 0 8px rgba(20, 184, 166, 0.45)",
                         }}
                         animate={{
                             y: [0, -18, 8, 0],

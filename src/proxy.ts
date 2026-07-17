@@ -68,7 +68,11 @@ export async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl
 
     const isAuthRoute = pathname.startsWith('/login') || pathname.startsWith('/signup') || pathname.startsWith('/forgot-password') || pathname.startsWith('/reset-password') || pathname.startsWith('/auth/callback')
-    const isPublicRoute = pathname.startsWith('/_next') || pathname.startsWith('/api') || pathname === '/favicon.ico'
+    const isPublicRoute =
+        pathname.startsWith('/_next') ||
+        pathname.startsWith('/api') ||
+        pathname === '/favicon.ico' ||
+        pathname === '/logo.png'
     const isOnboardingRoute = pathname === '/onboarding' || pathname.startsWith('/onboarding/')
 
     if (pathname.startsWith('/api')) {
@@ -108,9 +112,9 @@ export const config = {
          * Match all request paths except for the ones starting with:
          * - _next/static (static files)
          * - _next/image (image optimization files)
-         * - favicon.ico (favicon file)
+         * - favicon.ico and logo.png (public brand assets)
          * Feel free to modify this pattern to include more paths.
          */
-        '/((?!_next/static|_next/image|favicon.ico).*)',
+        '/((?!_next/static|_next/image|favicon.ico|logo.png).*)',
     ],
 }

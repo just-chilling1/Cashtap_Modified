@@ -166,8 +166,8 @@ export default function DfyPage() {
         >
             {/* Header */}
             <header className="flex flex-col items-center text-center gap-5">
-                <div className="w-16 h-16 bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center rounded-2xl shadow-[0_0_40px_rgba(212,175,55,0.1)]">
-                    <Crown size={32} className="text-[#D4AF37] fill-[#D4AF37]/20" />
+                <div className="w-16 h-16 bg-[#14B8A6]/10 border border-[#14B8A6]/20 flex items-center justify-center rounded-2xl shadow-[0_0_40px_rgba(20,184,166,0.1)]">
+                    <Crown size={32} className="text-[#14B8A6] fill-[#14B8A6]/20" />
                 </div>
                 <div className="flex flex-col gap-3">
                     <h1 className="text-[28px] sm:text-[40px] text-white font-black leading-tight tracking-tight">

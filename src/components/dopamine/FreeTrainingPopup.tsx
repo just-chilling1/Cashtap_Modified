@@ -18,7 +18,7 @@ const SPARKLE_POSITIONS = [
     { left: "30%", top: "8%" }, { left: "65%", top: "6%" },
 ];
 
-const SPARKLE_COLORS = ["#D4AF37", "#10B981", "#EAB308", "#F59E0B", "#34D399"];
+const SPARKLE_COLORS = ["#3B82F6", "#60A5FA", "#2563EB", "#93C5FD", "#38BDF8"];
 
 export function FreeTrainingPopup() {
     const [visible, setVisible] = useState(false);
@@ -93,8 +93,8 @@ export function FreeTrainingPopup() {
                             className="relative rounded-2xl overflow-hidden"
                             style={{
                                 background: "#141614",
-                                border: "1px solid rgba(212, 175, 55, 0.18)",
-                                boxShadow: "0 0 60px rgba(212, 175, 55, 0.08), 0 25px 50px rgba(0,0,0,0.7)",
+                                border: "1px solid rgba(59, 130, 246, 0.18)",
+                                boxShadow: "0 0 60px rgba(59, 130, 246, 0.08), 0 25px 50px rgba(0,0,0,0.7)",
                             }}
                         >
                             {/* Close button */}
@@ -111,11 +111,11 @@ export function FreeTrainingPopup() {
                                 <div
                                     className="w-[76px] h-[76px] rounded-full flex items-center justify-center -mt-1 mb-5"
                                     style={{
-                                        background: "linear-gradient(145deg, #E8A910 0%, #C4880A 100%)",
-                                        boxShadow: "0 0 35px rgba(232, 169, 16, 0.35), 0 6px 20px rgba(0,0,0,0.4)",
+                                        background: "linear-gradient(145deg, #60A5FA 0%, #2563EB 100%)",
+                                        boxShadow: "0 0 35px rgba(59, 130, 246, 0.35), 0 6px 20px rgba(0,0,0,0.4)",
                                     }}
                                 >
-                                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#FFF" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
                                         <path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22" />
                                         <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22" />
@@ -124,7 +124,7 @@ export function FreeTrainingPopup() {
                                 </div>
 
                                 {/* Headline */}
-                                <p className="text-[12px] font-bold tracking-[0.25em] uppercase mb-2" style={{ color: "#34D399" }}>
+                                <p className="text-[12px] font-bold tracking-[0.25em] uppercase mb-2" style={{ color: "#60A5FA" }}>
                                     ✨ You&apos;ve Been Selected ✨
                                 </p>
 
@@ -137,9 +137,9 @@ export function FreeTrainingPopup() {
 
                                 <p className="text-[15px] font-semibold mb-0.5">
                                     <span className="text-white">Learn How To Make </span>
-                                    <span style={{ color: "#34D399" }}>$1,000</span>
+                                    <span style={{ color: "#60A5FA" }}>$1,000</span>
                                     <span className="text-white"> — </span>
-                                    <span style={{ color: "#34D399" }}>$5,000</span>
+                                    <span style={{ color: "#60A5FA" }}>$5,000</span>
                                     <span className="text-white"> Per Day</span>
                                 </p>
 
@@ -148,7 +148,7 @@ export function FreeTrainingPopup() {
                                 {/* Progress section */}
                                 <div className="w-full mb-6">
                                     <div className="flex items-center justify-between mb-2">
-                                        <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "#D4AF37" }}>
+                                        <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "#3B82F6" }}>
                                             🔥 Spots Filling Fast
                                         </span>
                                         <span className="text-[12px] font-bold text-gray-400">
@@ -164,7 +164,7 @@ export function FreeTrainingPopup() {
                                             style={{ background: "#EF4444" }}
                                         />
                                     </div>
-                                    <p className="text-[12px] font-semibold mt-1.5" style={{ color: "#34D399" }}>
+                                    <p className="text-[12px] font-semibold mt-1.5" style={{ color: "#60A5FA" }}>
                                         Only 2 FREE spots remaining!
                                     </p>
                                 </div>
@@ -189,14 +189,14 @@ export function FreeTrainingPopup() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={handleClose}
-                                    whileHover={{ scale: 1.02, boxShadow: "0 6px 28px rgba(234, 179, 8, 0.45)" }}
+                                    whileHover={{ scale: 1.02, boxShadow: "0 6px 28px rgba(59, 130, 246, 0.45)" }}
                                     whileTap={{ scale: 0.97 }}
                                     className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-black text-[15px] uppercase tracking-wide cursor-pointer mb-3"
                                     style={{
-                                        background: "#EAB308",
-                                        color: "#000",
-                                        border: "2px solid #D4AF37",
-                                        boxShadow: "0 4px 20px rgba(234, 179, 8, 0.25)",
+                                        background: "#3B82F6",
+                                        color: "#FFFFFF",
+                                        border: "2px solid #60A5FA",
+                                        boxShadow: "0 4px 20px rgba(59, 130, 246, 0.25)",
                                     }}
                                 >
                                     <span className="text-lg">🎁</span>

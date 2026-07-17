@@ -4,7 +4,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
-import { Mail, ArrowLeft, Target, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { Mail, ArrowLeft, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 
 export default function ForgotPasswordPage() {
     const [email, setEmail] = useState("");
@@ -37,8 +38,8 @@ export default function ForgotPasswordPage() {
     return (
         <div className="min-h-screen bg-[#050505] flex items-center justify-center p-4 sm:p-6 relative overflow-x-hidden overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#D4AF37]/5 rounded-full blur-[120px]" />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#D4AF37]/5 rounded-full blur-[120px]" />
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#14B8A6]/5 rounded-full blur-[120px]" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#14B8A6]/5 rounded-full blur-[120px]" />
             </div>
 
             <motion.div
@@ -48,9 +49,7 @@ export default function ForgotPasswordPage() {
             >
                 <div className="glass-card p-5 sm:p-10 flex flex-col gap-6 sm:gap-8 border-[#141414] shadow-2xl">
                     <div className="flex flex-col items-center gap-4 text-center">
-                        <div className="w-16 h-16 bg-accent flex items-center justify-center rounded-xl shadow-gold">
-                            <Target size={32} className="text-black" />
-                        </div>
+                        <BrandLogo size={64} className="rounded-xl shadow-gold" priority />
                         <div className="flex flex-col">
                             <h1 className="brand-font text-[28px] text-text-primary leading-tight">Reset Password</h1>
                             <p className="text-sm text-text-secondary mt-1">
@@ -99,7 +98,7 @@ export default function ForgotPasswordPage() {
                             <div className="flex flex-col gap-2">
                                 <label className="text-[10px] font-black uppercase tracking-widest text-[#475569] ml-1">Email Address</label>
                                 <div className="relative group">
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#475569] group-focus-within:text-[#D4AF37] transition-colors" size={18} />
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#475569] group-focus-within:text-[#14B8A6] transition-colors" size={18} />
                                     <input
                                         type="email"
                                         required

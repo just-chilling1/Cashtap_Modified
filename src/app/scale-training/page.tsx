@@ -42,7 +42,7 @@ export default function ScaleTrainingPage() {
                     href={CTA_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative inline-flex items-center justify-center gap-3 bg-accent hover:bg-yellow-500 text-black font-bold text-base sm:text-lg px-6 py-4 sm:px-10 sm:py-5 rounded-xl transition-all shadow-gold hover:shadow-[0_0_40px_rgba(234,179,8,0.3)] w-full max-w-md sm:w-auto"
+                    className="group relative inline-flex items-center justify-center gap-3 bg-accent hover:bg-blue-400 text-white font-bold text-base sm:text-lg px-6 py-4 sm:px-10 sm:py-5 rounded-xl transition-all shadow-gold hover:shadow-[0_0_40px_rgba(59,130,246,0.3)] w-full max-w-md sm:w-auto"
                 >
                     <span className="brand-font tracking-wide">Click Here To Access Training</span>
                     <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />

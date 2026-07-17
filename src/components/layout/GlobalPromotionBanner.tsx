@@ -22,7 +22,7 @@ export function GlobalPromotionBanner() {
             <div className="relative overflow-hidden rounded-xl bg-[#0A0A0B] border border-accent/25 p-4 sm:p-5 shadow-[0_4px_24px_rgba(0,0,0,0.35)]">
                 <div
                     aria-hidden
-                    className="pointer-events-none absolute inset-y-0 left-0 w-1 bg-accent shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                    className="pointer-events-none absolute inset-y-0 left-0 w-1 bg-accent shadow-[0_0_15px_rgba(59,130,246,0.4)]"
                 />
                 <div
                     aria-hidden
@@ -62,7 +62,7 @@ export function GlobalPromotionBanner() {
                             href={CTA_URL}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group inline-flex w-full sm:w-auto md:w-auto items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm sm:text-[15px] font-bold text-black shadow-gold transition-all hover:bg-yellow-500 hover:shadow-[0_0_28px_rgba(212,175,55,0.28)] active:scale-[0.98]"
+                            className="group inline-flex w-full sm:w-auto md:w-auto items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm sm:text-[15px] font-bold text-white shadow-gold transition-all hover:bg-blue-400 hover:shadow-[0_0_28px_rgba(59,130,246,0.28)] active:scale-[0.98]"
                         >
                             <span className="brand-font tracking-wide">Watch free training</span>
                             <ArrowRight

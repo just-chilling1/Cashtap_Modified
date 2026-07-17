@@ -10,7 +10,7 @@ interface SuccessCelebrationProps {
     onDone?: () => void;
 }
 
-const CONFETTI_COLORS = ["#EAB308", "#10B981", "#6366F1", "#F59E0B", "#22D3EE", "#A855F7"];
+const CONFETTI_COLORS = ["#3B82F6", "#60A5FA", "#6366F1", "#2563EB", "#22D3EE", "#A855F7"];
 
 function ConfettiParticle({ delay, color }: { delay: number; color: string }) {
     const x = (Math.random() - 0.5) * 300;
@@ -44,7 +44,7 @@ export function SuccessCelebration({ show, title, subtitle, onDone }: SuccessCel
                     <motion.div
                         initial={{ y: 30 }}
                         animate={{ y: 0 }}
-                        className="relative flex flex-col items-center gap-5 bg-[#111113] border border-accent/30 rounded-3xl p-6 sm:p-10 shadow-[0_0_60px_rgba(234,179,8,0.15)] max-w-sm mx-4 w-full"
+                        className="relative flex flex-col items-center gap-5 bg-[#111113] border border-accent/30 rounded-3xl p-6 sm:p-10 shadow-[0_0_60px_rgba(59,130,246,0.15)] max-w-sm mx-4 w-full"
                     >
                         <div className="relative">
                             {Array.from({ length: 20 }).map((_, i) => (

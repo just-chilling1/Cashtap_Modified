@@ -26,7 +26,7 @@ export function SupportBanner() {
 
                 <a
                     href="mailto:cashtapai@neoai.freshdesk.com"
-                    className="bg-accent hover:bg-[#e6a800] transition-colors rounded-full min-h-11 h-[42px] px-7 whitespace-nowrap text-black font-bold text-[14px] flex items-center justify-center w-full md:w-auto shrink-0"
+                    className="bg-accent hover:bg-[#2563EB] transition-colors rounded-full min-h-11 h-[42px] px-7 whitespace-nowrap text-white font-bold text-[14px] flex items-center justify-center w-full md:w-auto shrink-0"
                 >
                     Contact Support
                 </a>

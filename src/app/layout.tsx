@@ -5,6 +5,10 @@ import { Shell } from "@/components/layout/Shell";
 export const metadata: Metadata = {
   title: "CashTap AI | Premium Earning Accelerator",
   description: "Identify high-potential discussions and generate natural responses that convert.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -14,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-            <body className="bg-[#050505] text-white selection:bg-[#D4AF37]/30 overflow-x-hidden">
+            <body className="bg-[#050505] text-white selection:bg-[#14B8A6]/30 overflow-x-hidden">
         <SearchProvider>
           <Shell>
             {children}

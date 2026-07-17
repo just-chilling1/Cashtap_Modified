@@ -35,7 +35,7 @@ export function WelcomeBanner() {
 
                     <motion.div
                         whileHover={{ scale: 1.1 }}
-                        className="w-14 h-14 bg-accent text-black rounded-full flex items-center justify-center relative z-20 shadow-xl"
+                        className="w-14 h-14 bg-accent text-white rounded-full flex items-center justify-center relative z-20 shadow-xl"
                     >
                         <Play size={22} className="fill-current ml-1" />
                     </motion.div>

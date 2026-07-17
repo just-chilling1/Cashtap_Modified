@@ -10,7 +10,6 @@ import {
     Smartphone,
     Globe,
     CheckCircle2,
-    Target,
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import {
@@ -20,6 +19,7 @@ import {
     ONBOARDING_META_KEY,
     ONBOARDING_PRODUCT_NAME,
 } from "@/config/onboarding-content";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 
 const PAGE_BG = "#0A0A0F";
 const TOTAL_STEPS = 4;
@@ -27,7 +27,7 @@ const TOTAL_STEPS = 4;
 const CONFETTI_COLORS = [
     "#F87171",
     "#FBBF24",
-    "#34D399",
+    "#60A5FA",
     "#60A5FA",
     "#A78BFA",
     "#F472B6",
@@ -36,7 +36,7 @@ const CONFETTI_COLORS = [
 ];
 
 const CARD_SURFACE =
-    "bg-white/[0.06] border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.35)] ring-1 ring-inset ring-white/[0.04] transition-colors duration-200";
+    "bg-white/[0.10] backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.35)] ring-1 ring-inset ring-white/[0.04] transition-colors duration-200";
 
 const listContainerVariants = {
     hidden: {},
@@ -193,7 +193,7 @@ function ProgressBar({
                 aria-label={`Onboarding step ${stepIndex + 1} of ${TOTAL_STEPS}`}
             >
                 <motion.div
-                    className="relative h-full rounded-full bg-gradient-to-r from-amber-400 to-amber-300 shadow-[0_0_12px_rgba(251,191,36,0.55)]"
+                    className="relative h-full rounded-full bg-gradient-to-r from-blue-400 to-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.55)]"
                     initial={false}
                     animate={{ width: `${clamped}%` }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
@@ -213,14 +213,14 @@ function IconChip({
     tone,
     children,
 }: {
-    tone: "amber" | "indigo" | "emerald";
+    tone: "emerald" | "indigo" | "amber";
     children: React.ReactNode;
 }) {
     const tones = {
-        amber: "bg-amber-500/20 text-amber-300 shadow-[0_0_16px_rgba(251,191,36,0.25)]",
-        indigo: "bg-indigo-500/20 text-indigo-200 shadow-[0_0_16px_rgba(99,102,241,0.25)]",
         emerald:
-            "bg-emerald-500/20 text-emerald-300 shadow-[0_0_16px_rgba(16,185,129,0.25)]",
+            "bg-blue-500/20 text-blue-300 shadow-[0_0_16px_rgba(59,130,246,0.25)]",
+        indigo: "bg-indigo-500/20 text-indigo-200 shadow-[0_0_16px_rgba(99,102,241,0.25)]",
+        amber: "bg-amber-500/20 text-amber-300 shadow-[0_0_16px_rgba(251,191,36,0.25)]",
     };
     return (
         <div
@@ -309,7 +309,7 @@ function PreparingStep({
                             "flex items-center gap-3 p-2.5 md:p-3",
                             CARD_SURFACE,
                             row.completed
-                                ? "border-emerald-400/30 hover:border-emerald-400/40"
+                                ? "border-blue-400/30 hover:border-blue-400/40"
                                 : "hover:border-white/20",
                         ].join(" ")}
                     >
@@ -360,16 +360,16 @@ function PreparingStep({
 
             <div
                 className={[
-                    "flex items-start gap-3 p-2.5 md:p-3 text-amber-100",
+                    "flex items-start gap-3 p-2.5 md:p-3 text-blue-100",
                     CARD_SURFACE,
-                    "border-amber-400/25 bg-amber-500/10",
+                    "border-blue-400/25 bg-blue-500/10",
                 ].join(" ")}
             >
-                <IconChip tone="amber">
+                <IconChip tone="emerald">
                     <Sparkles size={18} fill="currentColor" />
                 </IconChip>
                 <p className="text-xs md:text-sm leading-relaxed pt-1.5">
-                    <span className="font-bold text-amber-300">Tip:</span>{" "}
+                    <span className="font-bold text-blue-300">Tip:</span>{" "}
                     {onboardingContent.preparing.tip}
                 </p>
             </div>
@@ -414,7 +414,7 @@ function CongratsTeaserStep({ onContinue }: { onContinue: () => void }) {
         <section className="flex flex-col justify-center w-full max-w-xl mx-auto gap-4 md:gap-5">
             <div className="flex flex-col items-center gap-2.5 md:gap-3 text-center">
                 <span
-                    className="text-xs md:text-sm font-black text-amber-400 uppercase"
+                    className="text-xs md:text-sm font-black text-blue-400 uppercase"
                     style={{ letterSpacing: "0.22em" }}
                 >
                     {congratulations.badge}
@@ -459,7 +459,7 @@ function BetaDetailsStep({
                         {renderHighlight(
                             beta.headline,
                             "your account was flagged",
-                            "text-amber-300"
+                            "text-blue-300"
                         )}
                     </h1>
                     <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
@@ -565,12 +565,12 @@ function QualificationStep({
     return (
         <section className="flex flex-col justify-center w-full max-w-2xl mx-auto gap-2.5 md:gap-3">
             <div className="flex flex-col items-center gap-2">
-                <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-400/25 rounded-full px-3.5 py-1.5">
-                    <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center">
+                <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-400/25 rounded-full px-3.5 py-1.5">
+                    <span className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-300 flex items-center justify-center">
                         <Check size={12} strokeWidth={3} />
                     </span>
                     <span
-                        className="text-xs md:text-sm font-black text-emerald-300 uppercase"
+                        className="text-xs md:text-sm font-black text-blue-300 uppercase"
                         style={{ letterSpacing: "0.2em" }}
                     >
                         {qualification.badge}
@@ -596,7 +596,7 @@ function QualificationStep({
                             className={[
                                 "flex items-center gap-3 p-2.5 md:p-3",
                                 CARD_SURFACE,
-                                "hover:border-emerald-400/30",
+                                "hover:border-blue-400/30",
                             ].join(" ")}
                         >
                             <IconChip tone="emerald">
@@ -622,11 +622,11 @@ function QualificationStep({
                 whileTap={busy ? undefined : { scale: 0.98 }}
                 className={[
                     "w-full min-h-11 rounded-2xl py-3 md:py-3.5 px-6",
-                    "text-sm md:text-base font-extrabold tracking-wide text-black",
-                    "bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400",
-                    "shadow-[0_10px_30px_rgba(251,191,36,0.35)] hover:shadow-[0_15px_40px_rgba(251,191,36,0.55)]",
+                    "text-sm md:text-base font-extrabold tracking-wide text-white",
+                    "bg-gradient-to-r from-blue-400 via-blue-500 to-blue-400",
+                    "shadow-[0_10px_30px_rgba(59,130,246,0.35)] hover:shadow-[0_15px_40px_rgba(59,130,246,0.55)]",
                     "transition-shadow duration-200",
-                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0F]",
+                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0F]",
                     busy ? "opacity-70 cursor-not-allowed" : "",
                 ]
                     .filter(Boolean)
@@ -732,7 +732,7 @@ export function OnboardingFlow() {
                 className="pointer-events-none absolute inset-0"
                 style={{
                     background:
-                        "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(99,102,241,0.12), transparent 60%), radial-gradient(ellipse 60% 40% at 50% 100%, rgba(251,191,36,0.10), transparent 60%)",
+                        "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(99,102,241,0.12), transparent 60%), radial-gradient(ellipse 60% 40% at 50% 100%, rgba(59,130,246,0.10), transparent 60%)",
                 }}
             />
 
@@ -741,9 +741,7 @@ export function OnboardingFlow() {
             <div className="relative z-10 flex flex-col min-h-0 h-full px-4 md:px-8 py-3 md:py-5">
                 <header className="flex flex-col items-center gap-2 shrink-0 w-full max-w-5xl mx-auto">
                     <div className="flex flex-col items-center gap-1">
-                        <div className="w-10 h-10 rounded-lg bg-amber-400 flex items-center justify-center shadow-[0_0_20px_rgba(234,179,8,0.25)]">
-                            <Target size={20} className="text-black" strokeWidth={2.5} />
-                        </div>
+                        <BrandLogo size={40} className="rounded-lg shadow-[0_0_20px_rgba(20,184,166,0.25)]" />
                         <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">
                             {ONBOARDING_PRODUCT_NAME}
                         </span>

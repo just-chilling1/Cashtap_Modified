@@ -15,7 +15,7 @@
   --color-accent-muted: var(--brand-secondary);
   --color-brand-tint: var(--brand-tint);
 
-  --shadow-gold: 0 0 20px rgba(234, 179, 8, 0.15);
+  --shadow-gold: 0 0 20px rgba(59, 130, 246, 0.15);
 
   --color-success: #10B981;
   --color-error: #EF4444;
@@ -23,7 +23,7 @@
   --color-text-primary: #F8FAFC;
   --color-text-secondary: #94A3B8;
   --color-text-muted: #64748B;
-  --color-text-on-accent: #000000;
+  --color-text-on-accent: #FFFFFF;
 }
 
 :root {
@@ -34,10 +34,10 @@
   --bg-border: #242427;
   --bg-glass: rgba(22, 22, 24, 0.8);
 
-  /* Brand Colors - Sophisticated Gold & Indigo */
-  --brand-primary: #EAB308;
+  /* Brand Colors - Cool Blue & Indigo */
+  --brand-primary: #3B82F6;
   --brand-secondary: #6366F1;
-  --brand-tint: rgba(234, 179, 8, 0.1);
+  --brand-tint: rgba(59, 130, 246, 0.1);
 
   /* Fonts */
   --font-brand: 'Outfit', sans-serif;
@@ -69,7 +69,7 @@
     @apply antialiased min-h-screen overflow-x-hidden max-w-full;
     background-image:
       radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.03) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(234, 179, 8, 0.03) 0px, transparent 50%);
+      radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.03) 0px, transparent 50%);
   }
 
   img,

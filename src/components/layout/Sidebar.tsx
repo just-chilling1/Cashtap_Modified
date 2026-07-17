@@ -2,11 +2,12 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { LayoutGrid, Radar, LogOut, ChevronRight, GraduationCap, Target, Sparkles, Rocket, Scan, Search, MessageSquare, Brain, TrendingUp, ExternalLink, Wand2 } from "lucide-react";
+import { LayoutGrid, Radar, LogOut, ChevronRight, GraduationCap, Sparkles, Rocket, Scan, Search, MessageSquare, Brain, TrendingUp, ExternalLink, Wand2 } from "lucide-react";
 import { useSearch } from "@/context/SearchContext";
 import { clsx } from "clsx";
 import { motion } from "framer-motion";
 import { LiveActivityTicker } from "../dopamine/LiveActivityTicker";
+import { BrandLogo } from "../ui/BrandLogo";
 
 const STEPS = [
     { path: "/dashboard", label: "Home", icon: LayoutGrid },
@@ -82,7 +83,7 @@ export function Sidebar({ open = false, onClose }: { open?: boolean; onClose?: (
                 <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: `${progress}%` }}
-                    className="w-full bg-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                    className="w-full bg-[#14B8A6] shadow-[0_0_15px_rgba(20,184,166,0.4)]"
                     transition={{ duration: 1, ease: "circOut" }}
                 />
             </div>
@@ -93,9 +94,7 @@ export function Sidebar({ open = false, onClose }: { open?: boolean; onClose?: (
                     onClick={onClose}
                     className="flex items-center gap-4 group min-h-11"
                 >
-                    <div className="w-11 h-11 bg-accent flex items-center justify-center rounded-lg shadow-gold shrink-0">
-                        <Target size={22} className="text-black" />
-                    </div>
+                    <BrandLogo size={44} className="shadow-gold" />
                     <div className="flex flex-col">
                         <span className="brand-font text-[22px] text-text-primary tracking-tight leading-none">CashTap AI</span>
                         <span className="text-[10px] font-bold text-text-muted mt-1">Simple AI Ad Helper</span>

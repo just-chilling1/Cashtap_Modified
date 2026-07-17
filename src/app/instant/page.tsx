@@ -229,7 +229,7 @@ export default function InstantIncomePage() {
                         }
                     ].map((step) => (
                         <div key={step.num} className="bg-accent/5 border border-accent/15 rounded-2xl p-6 flex flex-col gap-4">
-                            <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center text-black font-black text-sm">
+                            <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center text-white font-black text-sm">
                                 {step.num}
                             </div>
                             <h3 className="text-lg font-bold text-text-primary">{step.title}</h3>
@@ -336,7 +336,7 @@ export default function InstantIncomePage() {
                                 className={clsx(
                                     "px-5 py-2.5 rounded-full text-sm font-bold transition-all border",
                                     selectedNiche === niche
-                                        ? "bg-accent border-accent text-black"
+                                        ? "bg-accent border-accent text-white"
                                         : "bg-surface border-border-dim text-text-secondary hover:border-accent/30 hover:text-text-primary"
                                 )}
                             >
@@ -451,7 +451,7 @@ export default function InstantIncomePage() {
                                                     "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all",
                                                     isCopied
                                                         ? "bg-green-500 text-black"
-                                                        : "bg-accent/10 border border-accent/20 text-accent hover:bg-accent hover:text-black"
+                                                        : "bg-accent/10 border border-accent/20 text-accent hover:bg-accent hover:text-white"
                                                 )}
                                             >
                                                 {isCopied ? <Check size={12} /> : <Copy size={12} />}

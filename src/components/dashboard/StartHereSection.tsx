@@ -112,7 +112,7 @@ export function StartHereSection({ completedSteps = 0 }: StartHereSectionProps) 
                                 className={clsx(
                                     "w-full h-full text-left rounded-xl border p-4 flex flex-col gap-3 min-h-11 transition-all group",
                                     done && "bg-green-500/5 border-green-500/20 hover:border-green-500/40",
-                                    current && "bg-accent/10 border-accent/40 hover:border-accent/60 shadow-[0_0_24px_rgba(234,179,8,0.08)]",
+                                    current && "bg-accent/10 border-accent/40 hover:border-accent/60 shadow-[0_0_24px_rgba(20,184,166,0.08)]",
                                     !done && !current && "bg-[#0a0a0c] border-border-dim/40 hover:border-accent/25"
                                 )}
                             >

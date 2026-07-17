@@ -236,7 +236,7 @@ export default function AutomatedProfitsPage() {
                         { num: "3", title: "Get Automatic Traffic", desc: "Once submitted, these sites send you traffic automatically. No daily work needed!" },
                     ].map((step) => (
                         <div key={step.num} className="bg-accent/5 border border-accent/15 rounded-2xl p-6 flex flex-col gap-4">
-                            <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center text-black font-black text-sm">
+                            <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center text-white font-black text-sm">
                                 {step.num}
                             </div>
                             <h3 className="text-lg font-bold text-text-primary">{step.title}</h3>
@@ -284,7 +284,7 @@ export default function AutomatedProfitsPage() {
                             className={clsx(
                                 "px-5 py-2.5 rounded-full text-sm font-bold transition-all border",
                                 selectedNiche === niche
-                                    ? "bg-accent border-accent text-black"
+                                    ? "bg-accent border-accent text-white"
                                     : "bg-surface border-border-dim text-text-secondary hover:border-accent/30 hover:text-text-primary"
                             )}
                         >
@@ -410,7 +410,7 @@ export default function AutomatedProfitsPage() {
                                                             className={clsx(
                                                                 "shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all",
                                                                 copiedDescId === source.id
-                                                                    ? "bg-accent text-black"
+                                                                    ? "bg-accent text-white"
                                                                     : "bg-surface border border-border-dim text-text-secondary hover:border-accent/30"
                                                             )}
                                                         >
@@ -435,7 +435,7 @@ export default function AutomatedProfitsPage() {
                                                         className={clsx(
                                                             "py-2.5 px-4 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-all",
                                                             isDone
-                                                                ? "bg-accent text-black"
+                                                                ? "bg-accent text-white"
                                                                 : "bg-surface border border-border-dim text-text-secondary hover:border-accent/30"
                                                         )}
                                                     >

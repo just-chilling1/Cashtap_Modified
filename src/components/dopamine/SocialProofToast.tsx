@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DollarSign, Users, TrendingUp, Sparkles, CheckCircle2, Copy, Star, ShieldCheck } from "lucide-react";
 
@@ -45,23 +45,40 @@ const ACTIONS = [
 export function SocialProofToast({ paused = false }: { paused?: boolean }) {
     const [current, setCurrent] = useState<{ text: string; icon: typeof DollarSign; color: string; bg: string } | null>(null);
     const [visible, setVisible] = useState(false);
+    const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    const dismiss = useCallback(() => {
+        if (hideTimeoutRef.current) {
+            clearTimeout(hideTimeoutRef.current);
+            hideTimeoutRef.current = null;
+        }
+        setVisible(false);
+    }, []);
 
     const showNext = useCallback(() => {
         if (paused) return;
+        if (hideTimeoutRef.current) {
+            clearTimeout(hideTimeoutRef.current);
+            hideTimeoutRef.current = null;
+        }
         const action = ACTIONS[Math.floor(Math.random() * ACTIONS.length)];
         const name = FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)];
         const loc = LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)];
         setCurrent({ text: action.text(name, loc), icon: action.icon, color: action.color, bg: action.bg });
         setVisible(true);
-        setTimeout(() => setVisible(false), 5000);
+        hideTimeoutRef.current = setTimeout(() => setVisible(false), 5000);
     }, [paused]);
 
     useEffect(() => {
-        if (paused) { setVisible(false); return; }
+        if (paused) { dismiss(); return; }
         const initialDelay = setTimeout(() => showNext(), 5000);
         const interval = setInterval(() => showNext(), 15000 + Math.random() * 10000);
-        return () => { clearTimeout(initialDelay); clearInterval(interval); };
-    }, [showNext, paused]);
+        return () => {
+            clearTimeout(initialDelay);
+            clearInterval(interval);
+            if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+        };
+    }, [showNext, paused, dismiss]);
 
     return (
         <AnimatePresence>
@@ -70,9 +87,18 @@ export function SocialProofToast({ paused = false }: { paused?: boolean }) {
                     initial={{ opacity: 0, y: 50, x: 20 }}
                     animate={{ opacity: 1, y: 0, x: 0 }}
                     exit={{ opacity: 0, y: 20, x: 20 }}
-                    className="fixed bottom-20 left-4 right-4 z-50 max-w-sm md:bottom-6 md:right-6 md:left-auto"
+                    onClick={dismiss}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            dismiss();
+                        }
+                    }}
+                    className="fixed bottom-20 left-4 right-4 z-50 max-w-sm md:bottom-6 md:right-6 md:left-auto cursor-pointer"
                 >
-                    <div className="bg-[#111113] border border-white/10 rounded-2xl p-4 flex items-center gap-3 shadow-[0_20px_50px_rgba(0,0,0,0.8)] min-w-0">
+                    <div className="bg-[#111113] border border-white/10 rounded-2xl p-4 flex items-center gap-3 shadow-[0_20px_50px_rgba(0,0,0,0.8)] min-w-0 hover:border-white/20 transition-colors">
                         <div className={`w-10 h-10 rounded-xl ${current.bg} flex items-center justify-center shrink-0`}>
                             <current.icon size={18} className={current.color} />
                         </div>

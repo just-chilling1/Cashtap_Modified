@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, Target, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { MobileBottomNav, Sidebar } from "./Sidebar";
 import { SupportBanner } from "../dashboard/SupportBanner";
 import { GlobalPromotionBanner } from "./GlobalPromotionBanner";
 import { SocialProofToast } from "../dopamine/SocialProofToast";
 import { WithdrawPopup } from "../dopamine/WithdrawPopup";
 import { FreeTrainingPopup } from "../dopamine/FreeTrainingPopup";
+import { BrandLogo } from "../ui/BrandLogo";
 
 export function Shell({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
@@ -54,9 +55,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                         {sidebarOpen ? <X size={22} /> : <Menu size={22} />}
                     </button>
                     <div className="flex items-center gap-2 min-h-11">
-                        <div className="w-11 h-11 bg-accent flex items-center justify-center rounded-md">
-                            <Target size={18} className="text-black" />
-                        </div>
+                        <BrandLogo size={36} />
                         <span className="brand-font text-[17px] text-text-primary tracking-tight leading-none">CashTap AI</span>
                     </div>
                     <div className="w-11 h-11" aria-hidden="true" />

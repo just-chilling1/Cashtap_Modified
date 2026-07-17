@@ -27,7 +27,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <div className="flex h-screen overflow-hidden bg-[#080808] w-full max-w-full">
+        <div className="flex h-screen overflow-hidden w-full max-w-full">
             {/* Mobile backdrop */}
             {sidebarOpen && (
                 <div

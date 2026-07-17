@@ -1,15 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Search, TrendingUp, BarChart3, Hash, ArrowRight, Play, Users, DollarSign, Zap } from "lucide-react";
-import { motion } from "framer-motion";
+import { Search, BarChart3, Hash, ArrowRight, Play, Users, Zap, GraduationCap, TrendingUp } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 import { MilestoneTracker } from "@/components/dopamine/MilestoneTracker";
 import { EarningsTestimonials } from "@/components/dopamine/EarningsTestimonials";
 import { RollingEarningsCounter } from "@/components/dopamine/RollingEarningsCounter";
 import { TrustBar } from "@/components/dopamine/TrustBar";
 import { VideoEmbed } from "@/components/ui/LazyIframe";
 import { StartHereSection } from "@/components/dashboard/StartHereSection";
+import { useSearch } from "@/context/SearchContext";
 
 interface Stats {
     totalSearches: number;
@@ -17,10 +18,62 @@ interface Stats {
     keywordVariations: number;
 }
 
+function getGreeting() {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good morning";
+    if (hour < 18) return "Good afternoon";
+    return "Good evening";
+}
+
+function CountUp({ value, className }: { value: number; className?: string }) {
+    const ref = useRef<HTMLSpanElement>(null);
+    const inView = useInView(ref, { once: true });
+    const [display, setDisplay] = useState(0);
+
+    useEffect(() => {
+        if (!inView) return;
+        if (value === 0) {
+            setDisplay(0);
+            return;
+        }
+        const duration = 800;
+        const start = performance.now();
+        let frame: number;
+        const tick = (now: number) => {
+            const t = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            setDisplay(Math.round(value * eased));
+            if (t < 1) frame = requestAnimationFrame(tick);
+        };
+        frame = requestAnimationFrame(tick);
+        return () => cancelAnimationFrame(frame);
+    }, [inView, value]);
+
+    return (
+        <span ref={ref} className={className}>
+            {display.toLocaleString()}
+        </span>
+    );
+}
+
 export default function DashboardPage() {
     const [stats, setStats] = useState<Stats | null>(null);
     const [loadingStats, setLoadingStats] = useState(true);
+    const [greeting, setGreeting] = useState("Welcome back");
     const router = useRouter();
+    const { keyword, analysisByVariation, postsByVariation, selectedAds, repliesByPostId } = useSearch();
+
+    const stepDone = [
+        keyword.trim().length > 0,
+        Object.keys(analysisByVariation).length > 0,
+        selectedAds.length > 0 || Object.values(postsByVariation).some((posts) => posts.length > 0),
+        Object.keys(repliesByPostId).length > 0,
+    ];
+    const completedSteps = stepDone.findIndex((done) => !done) === -1 ? 4 : stepDone.findIndex((done) => !done);
+
+    useEffect(() => {
+        setGreeting(getGreeting());
+    }, []);
 
     useEffect(() => {
         const hash = window.location.hash;
@@ -81,46 +134,40 @@ export default function DashboardPage() {
             animate={{ opacity: 1, y: 0 }}
             className="page-stack"
         >
-            {/* Header */}
             <header className="flex flex-col gap-1">
-                <h1 className="page-title">
-                    Home
+                <h1 className="page-title" suppressHydrationWarning>
+                    {greeting}
                 </h1>
                 <p className="subtitle">
-                    Follow the steps to find ads and create ready-to-use replies.
+                    {completedSteps === 0
+                        ? "Follow the 4 steps below to get your first ready-to-use replies."
+                        : completedSteps >= 4
+                          ? "Nice work — your replies are ready. Start a new topic anytime."
+                          : `You're on step ${completedSteps + 1} of 4. Pick up where you left off.`}
                 </p>
             </header>
 
-            {/* Start Here — new users (no searches yet) */}
-            {!loadingStats && (stats?.totalSearches ?? 0) === 0 && (
-                <StartHereSection completedSteps={0} />
-            )}
+            <StartHereSection completedSteps={completedSteps} />
 
-            {/* Rolling Earnings Counter */}
-            <RollingEarningsCounter />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                <RollingEarningsCounter />
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="grid grid-cols-2 gap-3"
+                >
+                    <div className="flex items-center gap-2.5 px-3 py-3 bg-blue-500/5 border border-blue-500/10 rounded-xl min-w-0">
+                        <Users size={15} className="text-blue-400 shrink-0" />
+                        <span className="text-[11px] font-bold text-blue-400 leading-tight">2,847 members active now</span>
+                    </div>
+                    <div className="flex items-center gap-2.5 px-3 py-3 bg-accent/5 border border-accent/10 rounded-xl min-w-0">
+                        <Zap size={15} className="text-accent shrink-0" />
+                        <span className="text-[11px] font-bold text-accent leading-tight">14,300+ replies today</span>
+                    </div>
+                </motion.div>
+            </div>
 
-            {/* Community Stats Bar */}
-            <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="grid grid-cols-1 md:grid-cols-3 gap-3"
-            >
-                <div className="flex items-center gap-3 px-4 py-3 bg-green-500/5 border border-green-500/10 rounded-xl">
-                    <DollarSign size={16} className="text-green-400" />
-                    <span className="text-[12px] font-bold text-green-400">$47,200+ earned this month</span>
-                </div>
-                <div className="flex items-center gap-3 px-4 py-3 bg-blue-500/5 border border-blue-500/10 rounded-xl">
-                    <Users size={16} className="text-blue-400" />
-                    <span className="text-[12px] font-bold text-blue-400">2,847 active members right now</span>
-                </div>
-                <div className="flex items-center gap-3 px-4 py-3 bg-accent/5 border border-accent/10 rounded-xl">
-                    <Zap size={16} className="text-accent" />
-                    <span className="text-[12px] font-bold text-accent">14,300+ replies generated today</span>
-                </div>
-            </motion.div>
-
-            {/* Video Section */}
             <div className="card-base overflow-hidden p-0!">
                 <VideoEmbed
                     src="https://player.vimeo.com/video/1171466801?badge=0&autopause=0&player_id=0&app_id=58479"
@@ -140,7 +187,6 @@ export default function DashboardPage() {
                 </div>
             </div>
 
-            {/* Stats Section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {statCards.map((stat, i) => {
                     const Icon = stat.icon;
@@ -150,7 +196,7 @@ export default function DashboardPage() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.1 }}
-                            className={`card-base flex flex-col gap-4 p-6 border ${stat.borderColor}`}
+                            className={`card-base flex flex-col gap-4 p-6 border ${stat.borderColor} hover:border-opacity-60 transition-colors`}
                         >
                             <div className="flex items-center justify-between">
                                 <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">{stat.label}</span>
@@ -161,55 +207,49 @@ export default function DashboardPage() {
                             {loadingStats ? (
                                 <div className="h-9 w-20 bg-border-dim/30 rounded-lg animate-pulse" />
                             ) : (
-                                <span className={`text-3xl font-black ${stat.color}`}>
-                                    {stat.value.toLocaleString()}
-                                </span>
+                                <CountUp value={stat.value} className={`text-3xl font-black tabular-nums ${stat.color}`} />
                             )}
                         </motion.div>
                     );
                 })}
             </div>
 
-            {/* Milestone Tracker */}
             {!loadingStats && stats && (
                 <MilestoneTracker totalSearches={stats.totalSearches} nichesAnalyzed={stats.nichesAnalyzed} />
             )}
 
-            {/* Quick Actions */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <button
-                    onClick={() => router.push("/search")}
+                    onClick={() => router.push("/training")}
                     className="card-base p-6 flex items-center gap-4 hover:border-accent/40 transition-all group cursor-pointer"
                 >
                     <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-all">
-                        <Search size={22} className="text-accent" />
+                        <GraduationCap size={22} className="text-accent" />
                     </div>
                     <div className="flex flex-col items-start gap-0.5 flex-1">
-                        <span className="text-text-primary font-bold text-sm">Step 1: Enter Topic</span>
-                        <span className="text-text-muted text-xs">Start by typing one topic</span>
+                        <span className="text-text-primary font-bold text-sm">Watch the Training</span>
+                        <span className="text-text-muted text-xs">Step-by-step videos to master the system</span>
                     </div>
                     <ArrowRight size={16} className="text-text-muted group-hover:text-accent transition-colors" />
                 </button>
 
                 <button
-                    onClick={() => router.push("/radar")}
-                    className="card-base p-6 flex items-center gap-4 hover:border-accent/40 transition-all group cursor-pointer"
+                    onClick={() => router.push("/scale-training")}
+                    className="card-base p-6 flex items-center gap-4 hover:border-green-500/40 transition-all group cursor-pointer"
                 >
                     <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-green-500/20 transition-all">
                         <TrendingUp size={22} className="text-green-400" />
                     </div>
                     <div className="flex flex-col items-start gap-0.5 flex-1">
-                        <span className="text-text-primary font-bold text-sm">Step 3: Find Ads</span>
-                        <span className="text-text-muted text-xs">Pick the ads you want to use</span>
+                        <span className="text-text-primary font-bold text-sm">Scale to $1k&ndash;$5k/day</span>
+                        <span className="text-text-muted text-xs">Advanced training for bigger results</span>
                     </div>
                     <ArrowRight size={16} className="text-text-muted group-hover:text-green-400 transition-colors" />
                 </button>
             </div>
 
-            {/* Testimonials */}
             <EarningsTestimonials />
 
-            {/* Trust Bar */}
             <TrustBar />
         </motion.div>
     );

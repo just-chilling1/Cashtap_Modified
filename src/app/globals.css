@@ -67,9 +67,6 @@
     color: var(--text-primary);
     font-family: var(--font-ui);
     @apply antialiased min-h-screen overflow-x-hidden max-w-full;
-    background-image:
-      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.03) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.03) 0px, transparent 50%);
   }
 
   img,
@@ -141,6 +138,28 @@
     @apply text-accent bg-accent/5;
   }
 
+  .sidebar-nav-link {
+    @apply flex items-center gap-3 min-h-10 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 relative;
+    @apply text-text-secondary hover:text-text-primary hover:bg-white/4;
+  }
+
+  .sidebar-nav-link.active {
+    @apply text-text-primary bg-accent/8;
+    box-shadow: inset 3px 0 0 0 var(--brand-primary);
+  }
+
+  .sidebar-step-badge {
+    @apply flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold shrink-0 border transition-colors;
+  }
+
+  .sidebar-step-badge.pending {
+    @apply border-border-dim text-text-muted bg-page;
+  }
+
+  .sidebar-step-badge.active {
+    @apply border-accent/50 text-accent bg-accent/10;
+  }
+
   /* Inputs */
   .input-base {
     @apply bg-page border border-border-dim rounded-lg px-4 py-3 text-sm text-text-primary outline-none transition-all placeholder:text-text-muted focus:border-accent/50 focus:ring-1 focus:ring-accent/20;
@@ -209,6 +228,71 @@
   animation: confetti-fall var(--duration) linear var(--delay) infinite;
 }
 
+/* Ambient animated background */
+.ambient-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.ambient-blob-1 {
+  top: -12%;
+  left: -8%;
+  width: 45vw;
+  height: 45vw;
+  max-width: 620px;
+  max-height: 620px;
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.28), transparent 68%);
+  animation: ambient-drift-1 26s ease-in-out infinite;
+}
+
+.ambient-blob-2 {
+  bottom: -18%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  max-width: 680px;
+  max-height: 680px;
+  background: radial-gradient(circle at center, rgba(99, 102, 241, 0.24), transparent 68%);
+  animation: ambient-drift-2 32s ease-in-out infinite;
+}
+
+.ambient-blob-3 {
+  top: 30%;
+  left: 40%;
+  width: 38vw;
+  height: 38vw;
+  max-width: 520px;
+  max-height: 520px;
+  background: radial-gradient(circle at center, rgba(45, 212, 191, 0.14), transparent 70%);
+  animation: ambient-drift-3 38s ease-in-out infinite;
+}
+
+.ambient-grain {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.05) 0px, transparent 45%),
+    radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.05) 0px, transparent 45%);
+}
+
+@keyframes ambient-drift-1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6vw, 8vh, 0) scale(1.12); }
+}
+
+@keyframes ambient-drift-2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
+  50% { transform: translate3d(-7vw, -6vh, 0) scale(1); }
+}
+
+@keyframes ambient-drift-3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.35; }
+  50% { transform: translate3d(-5vw, 5vh, 0) scale(1.2); opacity: 0.55; }
+}
+
 @keyframes progress-shimmer {
   0% {
     transform: translateX(-120%);
@@ -225,7 +309,17 @@
 
 @media (prefers-reduced-motion: reduce) {
   .animate-confetti-fall,
-  .animate-progress-shimmer {
+  .animate-progress-shimmer,
+  .ambient-blob {
     animation: none !important;
   }
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
